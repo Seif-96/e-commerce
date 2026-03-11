@@ -73,22 +73,22 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Shop</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">All Products</a>
+                  <Link href="#">All Products</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Categories</a>
+                  <Link href="#">Categories</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Brands</a>{' '}
+                  <Link href="#">Brands</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Electronics</a>
+                  <Link href="#">Electronics</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">{"Men's Fashion"}</a>
+                  <Link href="#">{"Men's Fashion"}</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">{"Women's Fashion"}</a>
+                  <Link href="#">{"Women's Fashion"}</Link>
                 </li>
               </ul>
             </div>
@@ -111,7 +111,7 @@ export default function Footer() {
                   <Link href="login">Sign In</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Create Account</Link>
+                  <Link href="register">Create Account</Link>
                 </li>
               </ul>
             </div>
@@ -119,19 +119,19 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Support</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Contact Us</a>
+                  <Link href="#">Contact Us</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Help Center</a>
+                  <Link href="#">Help Center</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Shipping Info</a>
+                  <Link href="#">Shipping Info</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Returns & Refunds</a>
+                  <Link href="#">Returns & Refunds</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Track Order</a>
+                  <Link href="#">Track Order</Link>
                 </li>
               </ul>
             </div>
@@ -139,13 +139,13 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Legal</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Privacy Policy</a>
+                  <Link href="#">Privacy Policy</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Terms of Service</a>
+                  <Link href="#">Terms of Service</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <a href="#">Cookie Policy</a>
+                  <Link href="#">Cookie Policy</Link>
                 </li>
               </ul>
             </div>
