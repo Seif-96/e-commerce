@@ -10,7 +10,11 @@ import { FaHeadset } from 'react-icons/fa6';
 import { FaSearch } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import Link from 'next/link';
-
+import Image from 'next/image';
+// import { Input } from "@/components/ui/input"
+import { Button } from '@/components/ui/button';
+import { Field } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
 export default function Navbar() {
   return (
     <>
@@ -67,7 +71,19 @@ export default function Navbar() {
       </div>
       <header className="sticky top-0 z-40 bg-white shadow-sm">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 lg:h-18 gap-4 lg:gap-8"></div>
+          <div className="flex items-center justify-between h-16 lg:h-18 gap-4 lg:gap-8">
+            <Link href="#">
+              <Image className="w-auto" src={logo} alt="freshcart" width={50} height={50} />
+            </Link>
+            <form className='hidden lg:flex flex-1 max-w-2xl'>
+              <Field orientation="horizontal" className="relative">
+                <Input type="search" placeholder="Search for products, brands and more..." />
+                <Button>
+                  <FaSearch />
+                </Button>
+              </Field>
+            </form>
+          </div>
         </div>
       </header>
     </>
