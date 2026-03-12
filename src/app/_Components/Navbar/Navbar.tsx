@@ -9,12 +9,15 @@ import { FaUserPlus } from 'react-icons/fa';
 import { FaHeadset } from 'react-icons/fa6';
 import { FaSearch } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
+import { FaCartShopping } from 'react-icons/fa6';
 import Link from 'next/link';
 import Image from 'next/image';
-// import { Input } from "@/components/ui/input"
-import { Button } from '@/components/ui/button';
+
 import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+// import { FaBars } from 'react-icons/fa';
+import { Button } from '@/components/ui/button';
+
 export default function Navbar() {
   return (
     <>
@@ -75,7 +78,7 @@ export default function Navbar() {
             <Link href="#">
               <Image className="w-auto" src={logo} alt="freshcart" width={50} height={50} />
             </Link>
-            <form className='hidden lg:flex flex-1 max-w-2xl'>
+            <form className="hidden lg:flex flex-1 max-w-2xl">
               <Field orientation="horizontal" className="relative">
                 <Input type="search" placeholder="Search for products, brands and more..." />
                 <Button>
@@ -83,6 +86,61 @@ export default function Navbar() {
                 </Button>
               </Field>
             </form>
+            <nav className="hidden xl:flex items-center gap-6">
+              <Link
+                href="/"
+                className="text-gray-700 hover:text-green-600 font-medium transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                href="/"
+                className="text-gray-700 hover:text-green-600 font-medium transition-colors"
+              >
+                Shop
+              </Link>
+              <Link
+                href="/"
+                className="text-gray-700 hover:text-green-600 font-medium transition-colors"
+              >
+                Brands
+              </Link>
+            </nav>
+            <div className="flex items-center gap-1 lg:gap-2">
+              <Link
+                href="/"
+                className="hidden lg:flex items-center gap-2 pr-3 mr-2 border-r border-gray-200 hover:opacity-80 transition-opacity"
+              >
+                <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center">
+                  <FaHeadset className=" text-green-500" />
+                </div>
+                <div className="text-xs">
+                  <div>
+                    <div className="text-gray-400">Support</div>
+                    <div className="font-semibold text-gray-700">24/7 Help</div>
+                  </div>
+                </div>
+              </Link>
+              <Link
+                href="/"
+                className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
+              >
+                <FaRegHeart className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
+              </Link>
+              <Link
+                href="/"
+                className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
+              >
+                <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
+              </Link>
+              <Link
+                href="/"
+                className="hidden lg:flex items-center gap-2 ml-2 px-5 py-2.5 rounded-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-colors shadow-sm shadow-green-600/20"
+              >
+                <FiUser />
+                Sign In
+              </Link>
+            </div>
           </div>
         </div>
       </header>
