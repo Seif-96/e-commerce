@@ -134,7 +134,7 @@ export default function Navbar() {
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
               </Link>
               <Link
-                href="/"
+                href="/login"
                 className="hidden lg:flex items-center gap-2 ml-2 px-5 py-2.5 rounded-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-colors shadow-sm shadow-green-600/20"
               >
                 <FiUser />

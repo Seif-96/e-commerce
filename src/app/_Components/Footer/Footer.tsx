@@ -8,12 +8,58 @@ import { FaTwitter } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaYoutube } from 'react-icons/fa';
 import { FaCreditCard } from 'react-icons/fa';
+import { FaTruck } from 'react-icons/fa';
+import { FaArrowRotateLeft } from 'react-icons/fa6';
+import { FaShieldAlt } from 'react-icons/fa';
+import { FaHeadset } from 'react-icons/fa';
 import logo from '../../../../public/freshcart-logo.svg';
 import Link from 'next/link';
 
 export default function Footer() {
   return (
     <>
+      <div className="bg-green-50 border-y border-green-100">
+        <div className="container mx-auto px-4 py-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                <FaTruck className="text-green-600 text-lg" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">Free Shipping</h4>
+                <p className="text-gray-500 text-xs">On orders over 500 EGP</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                <FaArrowRotateLeft className="text-green-600 text-lg" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">Easy Returns</h4>
+                <p className="text-gray-500 text-xs">14-day return policy</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                <FaShieldAlt className="text-green-600 text-lg" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">Secure Payment</h4>
+                <p className="text-gray-500 text-xs">100% secure checkout</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                <FaHeadset className="text-green-600 text-lg" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">24/7 Support</h4>
+                <p className="text-gray-500 text-xs">Contact us anytime</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <footer className="bg-gray-900 text-white fixed-bottom">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 gap-lg-12 text-gray-400">
