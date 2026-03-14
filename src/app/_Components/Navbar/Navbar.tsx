@@ -76,7 +76,7 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-18 gap-4 lg:gap-8">
             <Link href="#">
-              <Image className="w-auto" src={logo} alt="freshcart" width={50} height={50} />
+              <Image className="w-auto" src={logo} alt="freshcart"/>
             </Link>
             <form className="hidden lg:flex flex-1 max-w-2xl">
               <Field orientation="horizontal" className="relative">

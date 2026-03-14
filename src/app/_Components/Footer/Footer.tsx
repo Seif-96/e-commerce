@@ -65,7 +65,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 gap-lg-12 text-gray-400">
             <div className="lg:col-span-4">
               <div className="bg-[#FFFFFF] py-2 px-4 w-fit rounded-lg mb-6">
-                <Image className="w-auto" src={logo} alt="freshcart" width={50} height={50} />
+                <Image className="w-auto" src={logo} alt="freshcart"/>
               </div>
               <p className="mb-6 text-sm">
                 FreshCart is your one-stop destination for quality products. From fashion to
@@ -198,7 +198,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-gray-800">
-          <div className="container flex flex-wrap justify-center md:justify-between mx-auto px-4 py-6">
+          <div className="container flex flex-wrap justify-center md:justify-between mx-auto px-4 py-6 gap-4">
             <p className="text-gray-500 text-sm">© 2026 FreshCart. All rights reserved.</p>
             <div className="flex gap-5 text-sm">
               <div className="flex gap-2 items-center text-gray-500">
