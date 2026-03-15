@@ -13,7 +13,6 @@ import { FaRegHeart } from 'react-icons/fa';
 import { FaCartShopping } from 'react-icons/fa6';
 import Link from 'next/link';
 import Image from 'next/image';
-
 import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { FaBars } from 'react-icons/fa';
@@ -192,22 +191,48 @@ export default function Navbar() {
                       <Image className="w-auto" src={logo} alt="freshcart" />
                     </SheetTitle>
                   </SheetHeader>
-                  <div className="grid flex-1 auto-rows-min gap-6 px-3">
-                    <div className="grid gap-3">
-                      <form className="flex flex-1 max-w-2xl pb-4 border-b border-gray-100">
-                        <Field orientation="horizontal" className="relative ">
-                          <Input
-                            type="search"
-                            className="w-full! px-5! py-6! pr-12! rounded-xl! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm"
-                            placeholder="Search for products, brands and more..."
-                          />
-                          <Button className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-colors">
-                            <FaSearch />
-                          </Button>
-                        </Field>
-                      </form>
-                    </div>
-                    <div className="grid gap-3"></div>
+                  <div className="grid flex-1 auto-rows-min gap-6 px-4">
+                    <form className="flex flex-1 max-w-2xl pb-4 border-b border-gray-100">
+                      <Field orientation="horizontal" className="relative ">
+                        <Input
+                          type="search"
+                          className="w-full! px-5! py-6! pr-12! rounded-xl! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm"
+                          placeholder="Search for products, brands and more..."
+                        />
+                        <Button className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-colors">
+                          <FaSearch />
+                        </Button>
+                      </Field>
+                    </form>
+                    <nav>
+                      <div className="space-y-1">
+                        <Link
+                          href="/"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                        >
+                          Home
+                        </Link>
+                        <Link
+                          href="/"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                        >
+                          Shop
+                        </Link>
+                        <Link
+                          href="/"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                        >
+                          Categories
+                        </Link>
+                        <Link
+                          href="/"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                        >
+                          Brands
+                        </Link>
+                      </div>
+                    </nav>
+                    <div className='mx-4 border-t border-gray-100'></div>
                   </div>
                 </SheetContent>
               </Sheet>
