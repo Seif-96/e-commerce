@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import * as React from 'react';
 import logo from '../../../../public/freshcart-logo.svg';
 import { FaTruck } from 'react-icons/fa';
 import { IoIosGift } from 'react-icons/io';
@@ -15,9 +16,24 @@ import Image from 'next/image';
 
 import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-// import { FaBars } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
-
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import { Label } from '@/components/ui/label';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 export default function Navbar() {
   return (
     <>
@@ -76,17 +92,21 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-18 gap-4 lg:gap-8">
             <Link href="#">
-              <Image className="w-auto" src={logo} alt="freshcart"/>
+              <Image className="w-auto" src={logo} alt="freshcart" />
             </Link>
             <form className="hidden lg:flex flex-1 max-w-2xl">
               <Field orientation="horizontal" className="relative ">
-                <Input type="search" className='w-full! px-5! py-5! pr-12! rounded-full! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm' placeholder="Search for products, brands and more..." />
+                <Input
+                  type="search"
+                  className="w-full! px-5! py-5! pr-12! rounded-full! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm"
+                  placeholder="Search for products, brands and more..."
+                />
                 <Button className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-colors">
                   <FaSearch />
                 </Button>
               </Field>
             </form>
-            <nav className="hidden xl:flex items-center gap-6">
+            <nav className="hidden xl:flex items-center gap-5">
               <Link
                 href="/"
                 className="text-gray-700 hover:text-green-600 font-medium transition-colors"
@@ -99,6 +119,34 @@ export default function Navbar() {
               >
                 Shop
               </Link>
+              <NavigationMenu>
+                <NavigationMenuList className="flex items-center gap-1.5 text-gray-700 hover:text-green-600 hover:bg-white font-medium transition-colors">
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-md cursor-pointer">
+                      Categories
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="min-w-50">
+                        <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
+                          <Link href="/">All Categories</Link>
+                        </li>
+                        <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
+                          <Link href="/">Electronics</Link>
+                        </li>
+                        <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
+                          <Link href="/">{"Women's Fashion"}n</Link>
+                        </li>
+                        <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
+                          <Link href="/">{"Men's Fashion"}</Link>
+                        </li>
+                        <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
+                          <Link href="/">Beauty & Health</Link>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
               <Link
                 href="/"
                 className="text-gray-700 hover:text-green-600 font-medium transition-colors"
@@ -140,6 +188,37 @@ export default function Navbar() {
                 <FiUser />
                 Sign In
               </Link>
+              <Sheet>
+                <SheetTrigger className="lg:hidden ml-1 w-10 h-10 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center transition-colors">
+                  <Button className=" bg-green-600 hover:bg-green-700 text-white cursor-pointer">
+                    <FaBars />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader className="border-b border-gray-100">
+                    <SheetTitle>
+                      <Image className="w-auto" src={logo} alt="freshcart" />
+                    </SheetTitle>
+                  </SheetHeader>
+                  <div className="grid flex-1 auto-rows-min gap-6 px-3">
+                    <div className="grid gap-3">
+                      <form className="flex flex-1 max-w-2xl pb-4 border-b border-gray-100">
+                        <Field orientation="horizontal" className="relative ">
+                          <Input
+                            type="search"
+                            className="w-full! px-5! py-6! pr-12! rounded-xl! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm"
+                            placeholder="Search for products, brands and more..."
+                          />
+                          <Button className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-colors">
+                            <FaSearch />
+                          </Button>
+                        </Field>
+                      </form>
+                    </div>
+                    <div className="grid gap-3"></div>
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
