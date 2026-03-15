@@ -79,9 +79,9 @@ export default function Navbar() {
               <Image className="w-auto" src={logo} alt="freshcart"/>
             </Link>
             <form className="hidden lg:flex flex-1 max-w-2xl">
-              <Field orientation="horizontal" className="relative">
-                <Input type="search" placeholder="Search for products, brands and more..." />
-                <Button>
+              <Field orientation="horizontal" className="relative ">
+                <Input type="search" className='w-full! px-5! py-5! pr-12! rounded-full! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm' placeholder="Search for products, brands and more..." />
+                <Button className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-colors">
                   <FaSearch />
                 </Button>
               </Field>
