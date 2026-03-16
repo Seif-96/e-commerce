@@ -70,14 +70,14 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                  href={'/login'}
+                  href='/login'
                 >
                   <FiUser />
                   <span>Sign In</span>
                 </Link>
                 <Link
                   className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                  href={'/register'}
+                  href='/register'
                 >
                   <FaUserPlus />
                   <span>Sign Up</span>
@@ -90,7 +90,7 @@ export default function Navbar() {
       <header className="sticky top-0 z-40 bg-white shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-18 gap-4 lg:gap-8">
-            <Link href="#">
+            <Link href="/">
               <Image className="w-auto" src={logo} alt="freshcart" />
             </Link>
             <form className="hidden lg:flex flex-1 max-w-2xl">
@@ -113,7 +113,7 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="/"
+                href="/products"
                 className="text-gray-700 hover:text-green-600 font-medium transition-colors"
               >
                 Shop
@@ -127,7 +127,7 @@ export default function Navbar() {
                     <NavigationMenuContent>
                       <ul className="min-w-50">
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href="/">All Categories</Link>
+                          <Link href="/categories">All Categories</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
                           <Link href="/">Electronics</Link>
@@ -147,7 +147,7 @@ export default function Navbar() {
                 </NavigationMenuList>
               </NavigationMenu>
               <Link
-                href="/"
+                href="/brands"
                 className="text-gray-700 hover:text-green-600 font-medium transition-colors"
               >
                 Brands
@@ -155,7 +155,7 @@ export default function Navbar() {
             </nav>
             <div className="flex items-center gap-1 lg:gap-2">
               <Link
-                href="/"
+                href="/contact"
                 className="hidden lg:flex items-center gap-2 pr-3 mr-2 border-r border-gray-200 hover:opacity-80 transition-opacity"
               >
                 <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center">
@@ -169,13 +169,13 @@ export default function Navbar() {
                 </div>
               </Link>
               <Link
-                href="/"
+                href="/wish-list"
                 className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
               >
                 <FaRegHeart className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
               </Link>
               <Link
-                href="/"
+                href="/cart"
                 className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
               >
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
@@ -203,7 +203,7 @@ export default function Navbar() {
                         <Input
                           type="search"
                           className="w-full! px-5! py-6! pr-12! rounded-xl! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/20! focus:border-green-500! transition-all! text-sm"
-                          placeholder="Search for products, brands and more..."
+                          placeholder="Search products..."
                         />
                         <Button className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-colors">
                           <FaSearch />
@@ -223,7 +223,7 @@ export default function Navbar() {
                         </SheetClose>
                         <SheetClose>
                           <Link
-                            href="/"
+                            href="/products"
                             className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
                           >
                             Shop
@@ -231,7 +231,7 @@ export default function Navbar() {
                         </SheetClose>
                         <SheetClose>
                           <Link
-                            href="/"
+                            href="/categories"
                             className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
                           >
                             Categories
@@ -240,7 +240,7 @@ export default function Navbar() {
 
                         <SheetClose>
                           <Link
-                            href="/"
+                            href="/brands"
                             className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
                           >
                             Brands
@@ -252,7 +252,7 @@ export default function Navbar() {
                     <div className="flex flex-col">
                       <SheetClose>
                         <Link
-                          href="/"
+                          href="/wish-list"
                           className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
                         >
                           <div className="flex items-center gap-3">
@@ -265,7 +265,7 @@ export default function Navbar() {
                       </SheetClose>
                       <SheetClose>
                         <Link
-                          href="/"
+                          href="/cart"
                           className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
                         >
                           <div className="flex items-center gap-3">
@@ -289,7 +289,7 @@ export default function Navbar() {
                     </div>
                     <SheetClose>
                       <Link
-                        href="/"
+                        href="/contact"
                         className=" mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3 hover:bg-green-50 transition-colors"
                       >
                         <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">

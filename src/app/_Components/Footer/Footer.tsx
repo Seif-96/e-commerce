@@ -119,13 +119,13 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Shop</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">All Products</Link>
+                  <Link href="/products">All Products</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Categories</Link>
+                  <Link href="/categories">Categories</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Brands</Link>
+                  <Link href="/brands">Brands</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
                   <Link href="#">Electronics</Link>
@@ -142,16 +142,16 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Account</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">My Account</Link>
+                  <Link href="/profile">My Account</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
                   <Link href="#">Order History</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Wishlist</Link>
+                  <Link href="/wish-list">Wishlist</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Shopping Cart</Link>
+                  <Link href="/cart">Shopping Cart</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
                   <Link href="login">Sign In</Link>
@@ -165,19 +165,19 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Support</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Contact Us</Link>
+                  <Link href="/contact">Contact Us</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Help Center</Link>
+                  <Link href="/help">Help Center</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Shipping Info</Link>
+                  <Link href="/shipping">Shipping Info</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Returns & Refunds</Link>
+                  <Link href="/returns">Returns & Refunds</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Track Order</Link>
+                  <Link href="/track-order">Track Order</Link>
                 </li>
               </ul>
             </div>
@@ -185,13 +185,13 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Legal</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Privacy Policy</Link>
+                  <Link href="/privacy">Privacy Policy</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Terms of Service</Link>
+                  <Link href="/terms">Terms of Service</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Cookie Policy</Link>
+                  <Link href="/cookies">Cookie Policy</Link>
                 </li>
               </ul>
             </div>
