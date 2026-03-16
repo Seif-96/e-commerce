@@ -290,13 +290,13 @@ export default function Navbar() {
                     <SheetClose>
                       <Link
                         href="/contact"
-                        className=" mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3 hover:bg-green-50 transition-colors"
+                        className="mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3 hover:bg-green-50 transition-colors"
                       >
                         <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                           <FaHeadset className="text-lg text-green-600" />
                         </div>
                         <div>
-                          <div className="text-sm font-semibold text-gray-700">Need Help?</div>
+                          <div className="text-sm font-semibold text-start text-gray-700">Need Help?</div>
                           <div className="text-sm text-green-600">Contact Support</div>
                         </div>
                       </Link>
