@@ -249,7 +249,7 @@ export default function Navbar() {
                       </div>
                     </nav>
                     <div className="mx-4 border-t border-gray-100"></div>
-                    <div>
+                    <div className="flex flex-col">
                       <SheetClose>
                         <Link
                           href="/"
@@ -279,30 +279,18 @@ export default function Navbar() {
                     </div>
                     <div className="space-y-1">
                       <div className="grid grid-cols-2 gap-3 pt-2">
-                        <SheetClose>
-                          <Link
-                            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors"
-                            href="/login"
-                          >
-                            Sign In
-                          </Link>
+                        <SheetClose className="flex items-center cursor-pointer justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors">
+                          <Link href="/login">Sign In</Link>
                         </SheetClose>
-
-                        <SheetClose>
-                          <Link
-                            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-green-600 text-green-600 font-semibold hover:bg-green-50 transition-colors"
-                            href="/register"
-                          >
-                            Sign Up
-                          </Link>
+                        <SheetClose className="flex items-center cursor-pointer justify-center gap-2 px-4 py-3 rounded-xl border-2 border-green-600 text-green-600 font-semibold hover:bg-green-50 transition-colors">
+                          <Link href="/register">Sign Up</Link>
                         </SheetClose>
                       </div>
                     </div>
-
                     <SheetClose>
                       <Link
                         href="/"
-                        className="mx-4 mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3 hover:bg-green-50 transition-colors"
+                        className=" mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3 hover:bg-green-50 transition-colors"
                       >
                         <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                           <FaHeadset className="text-lg text-green-600" />
