@@ -125,7 +125,7 @@ export default function Navbar() {
                           <Link href="/">Electronics</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href="/">{"Women's Fashion"}n</Link>
+                          <Link href="/">{"Women's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
                           <Link href="/">{"Men's Fashion"}</Link>
@@ -180,12 +180,10 @@ export default function Navbar() {
                 Sign In
               </Link>
               <Sheet>
-                <SheetTrigger className="lg:hidden ml-1 w-10 h-10 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center transition-colors">
-                  <Button className=" bg-green-600 hover:bg-green-700 text-white cursor-pointer">
+                <SheetTrigger className="lg:hidden cursor-pointer ml-1 w-10 h-10 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center transition-colors">
                     <FaBars />
-                  </Button>
                 </SheetTrigger>
-                <SheetContent>
+                <SheetContent className="w-80! max-w-[85vw] overflow-y-auto!">
                   <SheetHeader className="border-b border-gray-100">
                     <SheetTitle>
                       <Image className="w-auto" src={logo} alt="freshcart" />
@@ -232,7 +230,31 @@ export default function Navbar() {
                         </Link>
                       </div>
                     </nav>
-                    <div className='mx-4 border-t border-gray-100'></div>
+                    <div className="mx-4 border-t border-gray-100"></div>
+                    <div>
+                      <Link
+                        href="/"
+                        className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className=" w-9 h-9 rounded-full bg-red-50 flex items-center justify-center">
+                            <FaRegHeart className="text-red-500" />
+                          </div>
+                          <span className="font-medium text-gray-700">Wishlist</span>
+                        </div>
+                      </Link>
+                      <Link
+                        href="/"
+                        className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className=" w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-md">
+                            <FaCartShopping className="text-green-600" />
+                          </div>
+                          <span className="font-medium text-gray-700">Cart</span>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
