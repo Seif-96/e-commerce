@@ -24,7 +24,14 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 export default function Navbar() {
   return (
@@ -182,9 +189,9 @@ export default function Navbar() {
               </Link>
               <Sheet>
                 <SheetTrigger className="lg:hidden cursor-pointer ml-1 w-10 h-10 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center transition-colors">
-                    <FaBars />
+                  <FaBars />
                 </SheetTrigger>
-                <SheetContent className="lg:hidden w-80! max-w-[85vw] overflow-y-auto!">
+                <SheetContent className="lg:hidden w-80! right-0! max-w-[85vw] overflow-y-auto!">
                   <SheetHeader className="border-b border-gray-100">
                     <SheetTitle>
                       <Image className="w-auto" src={logo} alt="freshcart" />
@@ -203,66 +210,109 @@ export default function Navbar() {
                         </Button>
                       </Field>
                     </form>
+
                     <nav>
-                      <div className="space-y-1">
-                        <Link
-                          href="/"
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
-                        >
-                          Home
-                        </Link>
-                        <Link
-                          href="/"
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
-                        >
-                          Shop
-                        </Link>
-                        <Link
-                          href="/"
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
-                        >
-                          Categories
-                        </Link>
-                        <Link
-                          href="/"
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
-                        >
-                          Brands
-                        </Link>
+                      <div className="space-y-1 flex flex-col">
+                        <SheetClose>
+                          <Link
+                            href="/"
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                          >
+                            Home
+                          </Link>
+                        </SheetClose>
+                        <SheetClose>
+                          <Link
+                            href="/"
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                          >
+                            Shop
+                          </Link>
+                        </SheetClose>
+                        <SheetClose>
+                          <Link
+                            href="/"
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                          >
+                            Categories
+                          </Link>
+                        </SheetClose>
+
+                        <SheetClose>
+                          <Link
+                            href="/"
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors"
+                          >
+                            Brands
+                          </Link>
+                        </SheetClose>
                       </div>
                     </nav>
                     <div className="mx-4 border-t border-gray-100"></div>
                     <div>
-                      <Link
-                        href="/"
-                        className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className=" w-9 h-9 rounded-full bg-red-50 flex items-center justify-center">
-                            <FaRegHeart className="text-red-500" />
+                      <SheetClose>
+                        <Link
+                          href="/"
+                          className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center">
+                              <FaRegHeart className="text-red-500 text-lg" />
+                            </div>
+                            <span className="font-medium text-gray-700">Wishlist</span>
                           </div>
-                          <span className="font-medium text-gray-700">Wishlist</span>
-                        </div>
-                      </Link>
-                      <Link
-                        href="/"
-                        className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className=" w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-md">
-                            <FaCartShopping className="text-green-600" />
+                        </Link>
+                      </SheetClose>
+                      <SheetClose>
+                        <Link
+                          href="/"
+                          className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-full bg-green-50 flex items-center justify-center text-md">
+                              <FaCartShopping className="text-green-600 text-lg" />
+                            </div>
+                            <span className="font-medium text-gray-700">Cart</span>
                           </div>
-                          <span className="font-medium text-gray-700">Cart</span>
-                        </div>
-                      </Link>
+                        </Link>
+                      </SheetClose>
                     </div>
-                    <div className='space-y-1'>
-                      <div className='grid grid-cols-2 gap-3 pt-2'>
-                        <Link className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors" href="/login">Sign In</Link>
-                        <Link className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-green-600 text-green-600 font-semibold hover:bg-green-50 transition-colors" href="/register">Sign Up</Link>
+                    <div className="space-y-1">
+                      <div className="grid grid-cols-2 gap-3 pt-2">
+                        <SheetClose>
+                          <Link
+                            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors"
+                            href="/login"
+                          >
+                            Sign In
+                          </Link>
+                        </SheetClose>
+
+                        <SheetClose>
+                          <Link
+                            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-green-600 text-green-600 font-semibold hover:bg-green-50 transition-colors"
+                            href="/register"
+                          >
+                            Sign Up
+                          </Link>
+                        </SheetClose>
                       </div>
                     </div>
 
+                    <SheetClose>
+                      <Link
+                        href="/"
+                        className="mx-4 mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3 hover:bg-green-50 transition-colors"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                          <FaHeadset className="text-lg text-green-600" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-700">Need Help?</div>
+                          <div className="text-sm text-green-600">Contact Support</div>
+                        </div>
+                      </Link>
+                    </SheetClose>
                   </div>
                 </SheetContent>
               </Sheet>
