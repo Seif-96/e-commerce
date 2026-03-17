@@ -1,8 +1,15 @@
+import FeaturedProducts from './_Components/Home/FeaturedProducts/FeaturedProducts';
+import ShopByCategory from './_Components/Home/ShopByCategory/ShopByCategory';
 
-export default function Home() {
+export default function home() {
+
   return (
 <>
-<div className='min-h-screen'></div>
+<div>
+  <ShopByCategory />
+  <FeaturedProducts />
+</div>
 </>
   );
 }
+// Featured Products
