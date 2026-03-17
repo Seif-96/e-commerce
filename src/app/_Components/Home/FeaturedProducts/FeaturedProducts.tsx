@@ -6,8 +6,8 @@ export default async function FeaturedProducts() {
   const allProducts = await getAllProducts();
   return (
     <>
-      <section className="p-10">
-        <div className="container mx-auto">
+      <section className="py-10">
+        <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 my-8">
             <div className="h-8 w-1.5 bg-linear-to-b from-emerald-500 to-emerald-700 rounded-full"></div>
             <h2 className="text-3xl font-bold text-gray-800">

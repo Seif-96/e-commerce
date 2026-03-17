@@ -1,8 +1,30 @@
 import React from 'react';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
 export default function loading() {
   return (
     <section className="p-10">
+      <div className="container mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-8">
+          <div className="flex  items-center gap-3 my-8">
+            <div className="h-8 w-1.5 bg-linear-to-b from-emerald-500 to-emerald-700 rounded-full"></div>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+              Shop By <span className="text-emerald-600">Category</span>
+            </h2>
+          </div>
+          <div className="text-green-600 self-end sm:self-auto hover:text-green-700 font-medium flex items-center cursor-pointer">
+            View All Categories <FaArrowRightLong className="ml-2" />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="bg-white rounded-lg p-4 text-center shadow-sm animate-pulse">
+            {/* Image */}
+            <div className="h-20 w-20 rounded-full mx-auto mb-3 bg-gray-200"></div>
+            {/* Title */}
+            <div className="h-4 w-20 bg-gray-200 rounded mx-auto"></div>
+          </div>
+        </div>
+      </div>
       <div className="container mx-auto">
         <div className="flex items-center gap-3 my-8">
           <div className="h-8 w-1.5 bg-linear-to-b from-emerald-500 to-emerald-700 rounded-full"></div>
