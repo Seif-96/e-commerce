@@ -23,6 +23,9 @@ export default function ProdictCart({ product }: { product: Root2 }) {
     }
     return stars;
   }
+  function getDiscountPercentage(price: number, priceAfterDiscount: number) {
+    return Math.round(((price - priceAfterDiscount) / price) * 100);
+  }
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:-translate-y-1.25 transition-all hover:shadow-lg">
       <div className="relative">
@@ -33,6 +36,13 @@ export default function ProdictCart({ product }: { product: Root2 }) {
           alt={product.title}
           className="w-full h-60 object-contain bg-white"
         />
+        {product.priceAfterDiscount && (
+          <div className="absolute top-3 left-3">
+            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+              -{getDiscountPercentage(product.price, product.priceAfterDiscount)}%
+            </span>
+          </div>
+        )}
         <div className="absolute top-3 right-3 flex flex-col space-y-2">
           <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-gray-600 hover:text-red-500">
             <FaRegHeart />
@@ -47,7 +57,7 @@ export default function ProdictCart({ product }: { product: Root2 }) {
           </button>
         </div>
         <div className="p-4">
-          <div className="text-xs text-gray-500 mb-1">{`Women's Fashion`}</div>
+          <div className="text-xs text-gray-500 mb-1">{product.brand.name}</div>
           <h3 className="font-medium mb-1 cursor-pointer">
             <Link href="\" className="line-clamp-2">
               {product.title}
