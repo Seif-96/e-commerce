@@ -57,7 +57,7 @@ export default function ProdictCart({ product }: { product: Root2 }) {
           </button>
         </div>
         <div className="p-4">
-          <div className="text-xs text-gray-500 mb-1">{product.brand.name}</div>
+          <div className="text-xs text-gray-500 mb-1">{product.category.name}</div>
           <h3 className="font-medium mb-1 cursor-pointer">
             <Link href="\" className="line-clamp-2">
               {product.title}
