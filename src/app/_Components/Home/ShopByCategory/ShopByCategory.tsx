@@ -2,12 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import Image from 'next/image';
-// https://ecommerce.routemisr.com/api/v1/categories
-export default function ShopByCategory() {
+import { getAllCategory } from '@/api/services/routemisr.service';
+export default async function ShopByCategory() {
+  const allCategory = await getAllCategory();
   return (
     <>
       <section className="py-10">
-        <div className="container mx-auto px-4 ">
+        <div className="container mx-auto px-4">
           <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-8">
             <div className="flex  items-center gap-3 my-8">
               <div className="h-8 w-1.5 bg-linear-to-b from-emerald-500 to-emerald-700 rounded-full"></div>
@@ -23,62 +24,22 @@ export default function ShopByCategory() {
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <Link href="\" className="">
-              <div className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer">
-                <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
-                  <Image
-                    src=""
-                    width={800}
-                    height={500}
-                    alt="ssss"
-                    className="w-full h-full object-cover"
-                  />
+            {allCategory?.map((category) => (
+              <Link key={category._id} href={`/categories/${category._id}`} className="">
+                <div className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer">
+                  <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
+                    <Image
+                      src={category.image}
+                      width={800}
+                      height={500}
+                      alt={category.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-medium">{category.name}</h3>
                 </div>
-                <h3 className="font-medium">Music</h3>
-              </div>
-            </Link>
-            <Link href="\" className="">
-              <div className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer">
-                <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
-                  <Image
-                    src=""
-                    width={800}
-                    height={500}
-                    alt="ssss"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-medium">Music</h3>
-              </div>
-            </Link>
-            <Link href="\" className="">
-              <div className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer">
-                <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
-                  <Image
-                    src=""
-                    width={800}
-                    height={500}
-                    alt="ssss"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-medium">Music</h3>
-              </div>
-            </Link>
-            <Link href="\" className="">
-              <div className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer">
-                <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
-                  <Image
-                    src=""
-                    width={800}
-                    height={500}
-                    alt="ssss"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-medium">Music</h3>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

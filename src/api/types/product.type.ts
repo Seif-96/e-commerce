@@ -32,3 +32,17 @@ export interface Brand {
   slug: string;
   image: string;
 }
+
+
+export interface AllCategory {
+  _id: string
+  name: string
+  slug: string
+  image: string
+  createdAt: string
+  updatedAt: string
+}
+export interface QuantityProps {
+  maxQty: number;
+  price: number; 
+}

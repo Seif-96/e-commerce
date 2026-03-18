@@ -6,10 +6,10 @@ import { FaHeadset } from 'react-icons/fa';
 export default function SliderComponent() {
   return (
     <>
-    {/* add slider her */}
-    {/* <section></section> */}
+      {/* add slider her */}
+      {/* <section></section> */}
       <section className="py-8 bg-gray-50">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
               <div className="bg-blue-50 text-blue-500 w-12 h-12 rounded-full flex items-center justify-center shrink-0 ">

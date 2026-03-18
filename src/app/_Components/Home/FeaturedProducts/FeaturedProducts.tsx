@@ -1,7 +1,6 @@
 import React from 'react';
 import { getAllProducts } from '@/api/services/routemisr.service';
 import ProdictCart from '../ProductCart/ProdictCart';
-// // https://ecommerce.routemisr.com/api/v1/products/6428de2adc1175abc65ca05b
 export default async function FeaturedProducts() {
   const allProducts = await getAllProducts();
   return (

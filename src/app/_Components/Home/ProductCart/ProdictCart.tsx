@@ -6,24 +6,10 @@ import { FaHeart } from "react-icons/fa";
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { FaRegEye } from 'react-icons/fa6';
 import { FaPlus } from 'react-icons/fa6';
-import { FaStar } from 'react-icons/fa';
-import { FaRegStar } from 'react-icons/fa';
-import { FaRegStarHalfStroke } from 'react-icons/fa6';
 import { Root2 } from '@/api/types/product.type';
+import { renderStars } from '../../StarsRat/StarsRate';
 export default function ProdictCart({ product }: { product: Root2 }) {
-  function renderStars(rating: number) {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (rating >= i) {
-        stars.push(<FaStar key={i} />);
-      } else if (rating >= i - 0.5) {
-        stars.push(<FaRegStarHalfStroke key={i} />);
-      } else {
-        stars.push(<FaRegStar key={i} />);
-      }
-    }
-    return stars;
-  }
+
   function getDiscountPercentage(price: number, priceAfterDiscount: number) {
     return Math.round(((price - priceAfterDiscount) / price) * 100);
   }
@@ -53,7 +39,7 @@ export default function ProdictCart({ product }: { product: Root2 }) {
             <FaArrowsRotate />
           </button>
           <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 cursor-pointer shadow-sm">
-            <Link href="">
+            <Link href={`/products/${product.id}`}>
               <FaRegEye />
             </Link>
           </button>
@@ -61,7 +47,7 @@ export default function ProdictCart({ product }: { product: Root2 }) {
         <div className="p-4">
           <div className="text-xs text-gray-500 mb-1">{product.category.name}</div>
           <h3 className="font-medium mb-1 cursor-pointer">
-            <Link href="\" className="line-clamp-2">
+            <Link href={`/products/${product.id}`} className="line-clamp-2">
               {product.title}
             </Link>
           </h3>

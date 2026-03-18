@@ -12,4 +12,3 @@ export default function home() {
 </>
   );
 }
-// Featured Products
