@@ -9,13 +9,13 @@ export async function getAllProducts(): Promise<Root2[] | undefined> {
     return undefined;
   }
 }
-export async function getSingleProduct(id:string): Promise<Root2> {
+export async function getSingleProduct(id: string): Promise<Root2> {
   try {
     const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
     const data = await res.json();
     return data.data;
-  } catch {
-    return undefined;
+  } catch (error) {
+    throw new Error("Failed to fetch product");  // النوع يظل Root2 فقط
   }
 }
 export async function getAllCategory(): Promise<AllCategory[] | undefined> {
