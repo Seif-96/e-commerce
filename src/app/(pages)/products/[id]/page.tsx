@@ -7,6 +7,8 @@ import AddToCartButtons from '@/app/_Components/SingleProduct/AddToCartButtons/A
 import { FaTruckFast } from 'react-icons/fa6';
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { FaShieldAlt } from 'react-icons/fa';
+import MyGallery from './../../../_Components/ProductSlider/ProductSlider';
+import { TabsDemo } from '@/app/_Components/ProductTab/ProdcutTab';
 
 export default async function products(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -22,12 +24,7 @@ export default async function products(props: { params: Promise<{ id: string }> 
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="lg:w-1/4">
               <div className="bg-white rounded-xl shadow-sm p-4 sticky top-4">
-                <Image
-                  src={singleProduct.imageCover}
-                  alt={singleProduct.title}
-                  width={500}
-                  height={800}
-                />
+                <MyGallery images={singleProduct.images.map((img) => img)} />
               </div>
             </div>
             <div className="lg:w-3/4">
@@ -127,6 +124,13 @@ export default async function products(props: { params: Promise<{ id: string }> 
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <TabsDemo />
           </div>
         </div>
       </section>

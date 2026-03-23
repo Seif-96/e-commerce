@@ -3,11 +3,23 @@ import { FaTruck } from 'react-icons/fa';
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { FaShieldAlt } from 'react-icons/fa';
 import { FaHeadset } from 'react-icons/fa';
+import Slider from '../Slider/Slider';
+import image1 from '../../../assets/images/image1.png';
+
 export default function SliderComponent() {
   return (
     <>
       {/* add slider her */}
-      {/* <section></section> */}
+      <section className="relative">
+        <div>
+          <Slider
+            spaceBetween={0}
+            sliderPerView={1}
+            height="h-100"
+            listOfImages={[image1.src, image1.src, image1.src]}
+          />
+        </div>
+      </section>
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
