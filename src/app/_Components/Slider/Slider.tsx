@@ -48,7 +48,7 @@ export default function Slider({
           >
             {/* Gradient overlay */}
             <div className="overlay py-20 text-white p-4 w-full h-full bg-linear-to-r from-green-500/90 to-green-400/50">
-              <div className="container px-17 h-full content-center">
+              <div className="container md:px-18 h-full content-center">
                 {/* Slide Title */}
                 <h2 className="text-white text-3xl font-bold mb-4 max-w-96">{slide.title}</h2>
                 {/* Slide Description */}
