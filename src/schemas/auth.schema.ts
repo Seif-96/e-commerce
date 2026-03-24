@@ -9,10 +9,7 @@ export const RegisterSchema = zod
       .min(3, '*Name is too short')
       .max(25, '*Name is too long'),
 
-    email: zod
-      .string()
-      .nonempty('*Please enter your email')
-      .email('*Invalid email address'),
+    email: zod.string().nonempty('*Please enter your email').email('*Invalid email address'),
 
     phone: zod
       .string()
@@ -34,9 +31,7 @@ export const RegisterSchema = zod
 
     rePassword: zod.string().nonempty('*Please confirm your password'),
 
-    terms: zod
-      .boolean()
-      .refine((val) => val === true, '*You must accept the terms and conditions'),
+    terms: zod.boolean().refine((val) => val === true, '*You must accept the terms and conditions'),
   })
   .refine((object) => object.password === object.rePassword, {
     message: 'password & rePassword not matched !',
@@ -44,3 +39,20 @@ export const RegisterSchema = zod
   });
 
 export type RegisterSchemaType = zod.infer<typeof RegisterSchema>;
+
+export const LoginSchema = zod.object({
+  email: zod.string().nonempty('*Please enter your email').email('*Invalid email address'),
+  password: zod
+    .string()
+    .nonempty('*Please enter your password')
+    .refine((val) => /[A-Z]/.test(val), '*Password must contain at least one uppercase letter')
+    .refine((val) => /[a-z]/.test(val), '*Password must contain at least one lowercase letter')
+    .refine((val) => /\d/.test(val), '*Password must contain at least one number')
+    .refine(
+      (val) => /[^\w\d\s:]/.test(val),
+      '*Password must contain at least one special character',
+    )
+    .min(8, '*Password must be at least 8 characters long')
+    .max(16, '*Password must not exceed 16 characters'),
+});
+export type LoginSchemaType = zod.infer<typeof LoginSchema>;

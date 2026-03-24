@@ -7,20 +7,43 @@ import { MdOutlineAccessTimeFilled } from 'react-icons/md';
 import { FaShieldAlt } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa6';
 import { FaFacebook } from 'react-icons/fa';
+import { IoLockClosed } from 'react-icons/io5';
+import { FaUsers } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Controller, useForm } from 'react-hook-form';
 import { SpinnerCustom } from '@/app/_Components/ButtonSpinner/ButtonSpinner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-// import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { LoginSchema, LoginSchemaType } from '@/schemas/auth.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userLogin } from '@/actions/auth.action';
+import { toast } from 'sonner';
 export default function Login() {
-    const [loading, setLoading] = useState(false);
-  const form = useForm({
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const form = useForm<LoginSchemaType>({
     defaultValues: {
       email: '',
       password: '',
-    }});
+    },
+    resolver: zodResolver(LoginSchema),
+  });
+  const { handleSubmit } = form;
+  async function mySubmit(data: LoginSchemaType) {
+    setLoading(true);
+    const isAccountSuccess = await userLogin(data);
+    if (isAccountSuccess) {
+      toast.success('Login Successfully');
+      router.push('/');
+    } else {
+      toast.error('Validation errors');
+    }
+    setLoading(false);
+  }
   return (
     <>
       <section>
@@ -96,8 +119,9 @@ export default function Login() {
                     </span>
                   </div>
                 </div>
-                <form className="space-y-6">
-                  <div className="flex flex-col gap-2">
+                <form onSubmit={handleSubmit(mySubmit)} className="space-y-6 text-[#364153]">
+                  <div className="relative flex flex-col gap-2">
+                    <MdEmail className="absolute left-4 top-1/2 translate-y-[20%] text-xl text-gray-400" />
                     <Controller
                       name="email"
                       control={form.control}
@@ -107,63 +131,92 @@ export default function Login() {
                           <Input
                             {...field}
                             id="email"
-                            className="py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
+                            className="pl-10! py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
                             aria-invalid={fieldState.invalid}
-                            placeholder="ali@example.com"
+                            placeholder="Enter your email"
                           />
                           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                         </Field>
                       )}
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="relative flex flex-col gap-2">
+                    <IoLockClosed className="absolute left-4 top-1/2 translate-y-[20%] text-xl text-gray-400" />
                     <Controller
                       name="password"
                       control={form.control}
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor="password">Password</FieldLabel>
+                          <div className="flex items-center justify-between">
+                            <FieldLabel htmlFor="password">Password</FieldLabel>
+                            <Link
+                              className="text-sm text-green-600 hover:text-green-700 cursor-pointer font-medium"
+                              href="/forget-password"
+                            >
+                              Forgot Password?
+                            </Link>
+                          </div>
                           <Input
                             {...field}
                             id="password"
                             type="password"
                             aria-invalid={fieldState.invalid}
-                            placeholder="create a strong password"
-                            className="py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
+                            placeholder="Enter your password"
+                            className="pl-10! py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
                           />
                           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                         </Field>
                       )}
                     />
                   </div>
-                        <div>
-                                  <div className="flex items-center gap-2">
-                                    <input
-                                      type="checkbox"
-                                      id="terms"
-                                      className="size-4 accent-green-600"
-                                    />
-                                    <label htmlFor="terms">Keep me signed in</label>
-                                  </div>
-
-                                </div>
-                              <Button
-                                  type="submit"
-                                  disabled={loading}
-                                  className="btn bg-green-600 text-white hover:bg-green-700 py-5 w-full transition-colors cursor-pointer text-[16px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed!"
-                                >
-                                  {loading ? (
-                                    <>
-                                      <SpinnerCustom />
-                                      <span>Sing In...</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <span>Sing In</span>
-                                    </>
-                                  )}
-                                </Button>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <input type="checkbox" id="terms" className="size-4 accent-green-600" />
+                      <label htmlFor="terms">Keep me signed in</label>
+                    </div>
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="btn bg-green-600 text-white hover:bg-green-700 py-5 w-full transition-colors cursor-pointer text-[16px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed!"
+                  >
+                    {loading ? (
+                      <>
+                        <SpinnerCustom />
+                        <span>Sing In...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Sing In</span>
+                      </>
+                    )}
+                  </Button>
                 </form>
+                <div className="text-center mt-8 pt-6 border-t border-gray-100">
+                  <p className="text-gray-600">
+                    New to FreshCart?{' '}
+                    <Link
+                      className="text-green-600 hover:text-green-700 ms-2 font-semibold cursor-pointer"
+                      href="/register"
+                    >
+                      Create an account
+                    </Link>
+                  </p>
+                </div>
+                <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-gray-500">
+                  <div className="flex items-center">
+                    <IoLockClosed className="mr-1" />
+                    SSL Secured
+                  </div>
+                  <div className="flex items-center">
+                    <FaUsers className="mr-1" />
+                    50K+ Users
+                  </div>
+                  <div className="flex items-center">
+                    <FaStar className="mr-1" />
+                    4.9 Rating
+                  </div>
+                </div>
               </div>
             </div>
           </div>

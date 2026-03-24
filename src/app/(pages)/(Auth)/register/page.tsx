@@ -283,6 +283,15 @@ export default function Register() {
                 )}
               </Button>
             </form>
+            <p className="border-t pt-10 border-gray-300/30 my-4 text-center">
+              Already have an account?
+              <Link
+                className="text-green-600 ms-2 cursor-pointer hover:underline font-medium"
+                href="/login"
+              >
+                Sign In
+              </Link>
+            </p>
           </div>
         </div>
       </section>

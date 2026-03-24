@@ -7,6 +7,38 @@ import Slider from '../Slider/Slider';
 import image1 from '../../../assets/images/image1.png';
 
 export default function SliderComponent() {
+  const slides = [
+    {
+      image: image1.src,
+      title: 'Fresh Products Delivered to your Door',
+      desc: 'Get 20% off your first order',
+      link: '/prodcuts',
+      linkDesc: 'Shop Now',
+      link2: '/deals',
+      linkDesc2: 'View Deals',
+      color: 'green-500',
+    },
+    {
+      image: image1.src,
+      title: 'Premium Quality Guaranteed',
+      desc: 'Fresh from farm to your table',
+      link: '/prodcuts',
+      linkDesc: 'Shop Now',
+      link2: '/about',
+      linkDesc2: 'Learn More',
+      color: 'blue-500',
+    },
+    {
+      image: image1.src,
+      title: 'Fast & Free Delivery',
+      desc: 'Same day delivery available',
+      link: '/prodcuts',
+      linkDesc: 'Order Now',
+      link2: '/delivery',
+      linkDesc2: 'Delivery Info',
+      color: 'purple-500',
+    },
+  ];
   return (
     <>
       {/* add slider her */}
@@ -15,8 +47,7 @@ export default function SliderComponent() {
           <Slider
             spaceBetween={0}
             sliderPerView={1}
-            height="h-100"
-            listOfImages={[image1.src, image1.src, image1.src]}
+            listOfSlides={slides}
           />
         </div>
       </section>
