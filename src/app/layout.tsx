@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Exo } from 'next/font/google';
 import './globals.css';
 import Navbar from './_Components/Navbar/Navbar';
 import Footer from './_Components/Footer/Footer';
+import { Toaster } from '@/components/ui/sonner';
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -31,6 +32,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${exo.className} antialiased`}>
         <Navbar />
+        <Toaster
+          position="top-right"
+          richColors
+          toastOptions={{
+            duration: 4000,
+            className: 'custom-toast',
+          }}
+        />
         {children}
         <Footer />
       </body>

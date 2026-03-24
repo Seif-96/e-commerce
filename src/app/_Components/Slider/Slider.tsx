@@ -30,6 +30,7 @@ export default function Slider({
       spaceBetween={spaceBetween}
       slidesPerView={sliderPerView}
       navigation
+      loop={true}
     >
       {listOfImages.map((src) => (
         <SwiperSlide key={src}>

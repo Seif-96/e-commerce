@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import logo from '../../../../public/freshcart-logo.svg';
+import logo from '../../../assets/images/freshcart-logo.svg';
 import { FaTruck } from 'react-icons/fa';
 import { IoIosGift } from 'react-icons/io';
 import { FaPhoneAlt } from 'react-icons/fa';

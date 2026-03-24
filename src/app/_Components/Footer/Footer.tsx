@@ -12,7 +12,7 @@ import { FaTruck } from 'react-icons/fa';
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { FaShieldAlt } from 'react-icons/fa';
 import { FaHeadset } from 'react-icons/fa';
-import logo from '../../../../public/freshcart-logo.svg';
+import logo from '../../../assets/images/freshcart-logo.svg';
 import Link from 'next/link';
 
 export default function Footer() {
