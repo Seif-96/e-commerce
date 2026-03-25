@@ -61,8 +61,6 @@ export default function Login() {
                   src={image3}
                   alt="login image"
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
-                  width={100}
-                  height={100}
                 />
                 <div className="space-y-4">
                   <h2 className="text-3xl font-bold text-gray-800">
