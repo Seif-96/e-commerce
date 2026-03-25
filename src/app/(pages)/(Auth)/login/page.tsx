@@ -22,9 +22,13 @@ import { LoginSchema, LoginSchemaType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userLogin } from '@/actions/auth.action';
 import { toast } from 'sonner';
+import { FaEye } from 'react-icons/fa6';
+import { FaEyeSlash } from 'react-icons/fa';
+
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<LoginSchemaType>({
     defaultValues: {
       email: '',
@@ -38,7 +42,9 @@ export default function Login() {
     const isAccountSuccess = await userLogin(data);
     if (isAccountSuccess) {
       toast.success('Login Successfully');
-      router.push('/');
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
     } else {
       toast.error('Validation errors');
     }
@@ -121,7 +127,7 @@ export default function Login() {
                 </div>
                 <form onSubmit={handleSubmit(mySubmit)} className="space-y-6 text-[#364153]">
                   <div className="relative flex flex-col gap-2">
-                    <MdEmail className="absolute left-4 top-1/2 translate-y-[20%] text-xl text-gray-400" />
+                    <MdEmail className="absolute left-4 top-9.5 text-xl text-gray-400" />
                     <Controller
                       name="email"
                       control={form.control}
@@ -141,7 +147,14 @@ export default function Login() {
                     />
                   </div>
                   <div className="relative flex flex-col gap-2">
-                    <IoLockClosed className="absolute left-4 top-1/2 translate-y-[20%] text-xl text-gray-400" />
+                    <IoLockClosed className="absolute left-4 top-9.5 text-xl text-gray-400" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-9.5 text-xl cursor-pointer text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                     <Controller
                       name="password"
                       control={form.control}
@@ -159,7 +172,7 @@ export default function Login() {
                           <Input
                             {...field}
                             id="password"
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             aria-invalid={fieldState.invalid}
                             placeholder="Enter your password"
                             className="pl-10! py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
@@ -203,7 +216,7 @@ export default function Login() {
                     </Link>
                   </p>
                 </div>
-                <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-gray-500">
+                <div className="flex items-center justify-center space-x-6 mt-6 text-xs md:text-sm text-gray-500">
                   <div className="flex items-center">
                     <IoLockClosed className="mr-1" />
                     SSL Secured

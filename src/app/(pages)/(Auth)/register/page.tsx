@@ -22,6 +22,25 @@ import { SpinnerCustom } from '@/app/_Components/ButtonSpinner/ButtonSpinner';
 export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [passwordValue, setPasswordValue] = useState('');
+  function checkPasswordStrength(password: string) {
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+    return score;
+  }
+  const strength = checkPasswordStrength(passwordValue);
+  const strengthData = {
+    0: { text: 'Weak', color: 'bg-gray-200', bgt: 'text-gray-400', width: '0%' },
+    1: { text: 'Weak', color: 'bg-red-500', bgt: 'text-red-500', width: '20%' },
+    2: { text: 'Fair', color: 'bg-orange-500', bgt: 'text-orange-500', width: '40%' },
+    3: { text: 'Good', color: 'bg-blue-500', bgt: 'text-blue-500', width: '60%' },
+    4: { text: 'Strong', color: 'bg-green-500', bgt: 'text-green-500', width: '80%' },
+    5: { text: 'Strong', color: 'bg-green-600', bgt: 'text-green-600', width: '100%' },
+  }[strength];
   const form = useForm<RegisterSchemaType>({
     defaultValues: {
       name: '',
@@ -39,7 +58,9 @@ export default function Register() {
     const isAccountSuccess = await userRegister(data);
     if (isAccountSuccess) {
       toast.success('Account created successfully');
-      router.push('/login');
+            setTimeout(() => {
+          router.push('/login');
+  }, 1500);
     } else {
       toast.error('Validation errors');
     }
@@ -50,7 +71,7 @@ export default function Register() {
       <section className="py-10 text-[#364153]">
         <div className="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 p-4">
           <div>
-            <h1 className="text-4xl font-bold">
+            <h1 className="text-3xl md:text-4xl font-bold">
               Welcome to <span className="text-green-600">FreshCart</span>
             </h1>
             <p className="text-xl mt-2 mb-4">
@@ -190,11 +211,33 @@ export default function Register() {
                         {...field}
                         id="password"
                         type="password"
+                        onChange={(e) => {
+                          field.onChange(e); // مهم جدًا عشان RHF
+                          setPasswordValue(e.target.value); // نحفظ القيمة
+                        }}
                         aria-invalid={fieldState.invalid}
                         placeholder="create a strong password"
                         className="py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
                       />
                       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      <div className="mt-1 flex items-center gap-2">
+                        {/* bar */}
+                        <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full transition-all duration-500 ${strengthData?.color}`}
+                            style={{ width: strengthData?.width }}
+                          ></div>
+                        </div>
+                        {/* text */}
+                        <div className="flex justify-between mt-1 text-sm">
+                          <span className={`font-medium ${strengthData?.bgt}`}>
+                            {strengthData?.text}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-gray-500 -mt-2 text-xs">
+                        Must be at least 8 characters with numbers and symbols
+                      </p>
                     </Field>
                   )}
                 />
