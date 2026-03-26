@@ -1,4 +1,4 @@
-import { AllCategory, Root2 } from '../types/product.type';
+import { AllCategory, Brand, Root2 } from '../types/product.type';
 
 export async function getAllProducts(): Promise<Root2[] | undefined> {
   try {
@@ -15,7 +15,7 @@ export async function getSingleProduct(id: string): Promise<Root2> {
     const data = await res.json();
     return data.data;
   } catch (error) {
-    throw new Error('Failed to fetch product'); // النوع يظل Root2 فقط
+    throw new Error('Failed to fetch product');
   }
 }
 export async function getAllCategory(): Promise<AllCategory[] | undefined> {
@@ -27,17 +27,22 @@ export async function getAllCategory(): Promise<AllCategory[] | undefined> {
     return undefined;
   }
 }
-export async function getSingleCategory() {
+export async function getAllBrands(): Promise<Brand[] | undefined> {
   try {
-    const res = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/categories/6439d61c0049ad0b52b90051`,
-    );
+    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/brands`);
     const data = await res.json();
-    console.log('SingleCategory', data);
-
-    // return data.data;
+    return data.data;
   } catch (error) {
     return undefined;
   }
 }
-getSingleCategory();
+
+export async function getSingleBrands(id: string): Promise<Brand[]> {
+  try {
+    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products?brand=${id}`);
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    throw new Error('Failed to fetch product');
+  }
+}

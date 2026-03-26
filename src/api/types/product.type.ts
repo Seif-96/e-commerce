@@ -31,18 +31,20 @@ export interface Brand {
   name: string;
   slug: string;
   image: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
-
 export interface AllCategory {
-  _id: string
-  name: string
-  slug: string
-  image: string
-  createdAt: string
-  updatedAt: string
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
 }
 export interface QuantityProps {
   maxQty: number;
-  price: number; 
+  price: number;
 }
