@@ -15,3 +15,14 @@ export function renderStars(rating: number) {
     }
     return stars;
   }
+export function calculateRatingPercentages(reviews: { rating: number }[]) {
+    const total = reviews.length;
+    const counts = [0, 0, 0, 0, 0]; // index 0 = 1 star, 4 = 5 star
+    reviews.forEach((review) => {
+      if (review.rating >= 1 && review.rating <= 5) {
+        counts[review.rating - 1]++;
+      }
+    });
+    const percentages = counts.map((count) => (total ? (count / total) * 100 : 0));
+    return percentages; // [1*, 2*, 3*, 4*, 5*]
+  }

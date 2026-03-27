@@ -130,7 +130,20 @@ export default async function products(props: { params: Promise<{ id: string }> 
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <TabsDemo />
+            <TabsDemo id={id}/>
+          </div>
+        
+        </div>
+      </section>
+      <section className="py-10">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-1.5 bg-linear-to-b from-emerald-500 to-emerald-700 rounded-full"></div>
+            <h2 className="text-2xl font-bold text-gray-800">
+              You May Also <span className="text-emerald-600">Like</span>
+            </h2>
+          </div>
           </div>
         </div>
       </section>

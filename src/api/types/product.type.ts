@@ -2,7 +2,7 @@ export type Root = Root2[];
 export interface Root2 {
   sold?: number;
   images: string[];
-  subcategory: [[object]];
+  subcategory: Subcategory[];
   ratingsQuantity: number;
   _id: string;
   title: string;
@@ -16,9 +16,16 @@ export interface Root2 {
   ratingsAverage: number;
   createdAt: string;
   updatedAt: string;
+  reviews: Review[];
   id: string;
   availableColors?: string[];
   priceAfterDiscount?: number;
+}
+export interface Subcategory {
+  _id: string;
+  name: string;
+  slug: string;
+  category: string;
 }
 export interface Category {
   _id: string;
@@ -47,4 +54,19 @@ export interface AllCategory {
 export interface QuantityProps {
   maxQty: number;
   price: number;
+}
+export interface User {
+  _id: string;
+  name: string;
+}
+
+export interface Review {
+  _id: string;
+  rating: number;
+  review: string;
+  product: string;
+  user: User;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
