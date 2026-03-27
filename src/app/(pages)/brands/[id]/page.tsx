@@ -27,7 +27,7 @@ export default async function page(props: { params: Promise<{ id: string }> }) {
               href={`/products`}
             >
               <FaTags className="text-sm" />
-              {singleBrands?.[0]?.name}
+              {singleBrands[0]?.brand.name}
               <IoMdClose className="text-sm" />
             </Link>
             <Link className="text-sm text-gray-500 hover:text-gray-700 underline" href="/products">
@@ -51,8 +51,8 @@ export default async function page(props: { params: Promise<{ id: string }> }) {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-              {singleBrands?.map((product: Brand) => (
-                <ProdictCart key={product._id} product={product} />
+              {singleBrands?.map((product) => (
+                <ProdictCart key={product.brand._id} product={product} />
               ))}
             </div>
           )}

@@ -38,7 +38,7 @@ export async function getAllBrands(): Promise<Brand[] | undefined> {
   }
 }
 
-export async function getSingleBrands(id: string): Promise<Brand[]> {
+export async function getSingleBrands(id: string): Promise<Root2[]> {
   try {
     const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products?brand=${id}`);
     const data = await res.json();
