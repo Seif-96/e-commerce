@@ -27,7 +27,7 @@ export default async function page(props: { params: Promise<{ id: string }> }) {
               href={`/products`}
             >
               <FaTags className="text-sm" />
-              {singleBrands.length > 0 && singleBrands[0].brand.name}
+              {singleBrands?.[0]?.name}
               <IoMdClose className="text-sm" />
             </Link>
             <Link className="text-sm text-gray-500 hover:text-gray-700 underline" href="/products">
