@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderStars } from '@/app/_Components/StarsRat/StarsRate';
-import { getSingleProduct } from '@/api/services/routemisr.service';
+import { getSingleProduct, getSingleSubcategories } from '@/api/services/routemisr.service';
 import Quantity from '@/app/_Components/SingleProduct/Quantity/Quantity';
 import AddToCartButtons from '@/app/_Components/SingleProduct/AddToCartButtons/AddToCartButtons';
 import { FaTruckFast } from 'react-icons/fa6';
@@ -8,7 +8,9 @@ import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { FaShieldAlt } from 'react-icons/fa';
 import MyGallery from './../../../_Components/ProductSlider/ProductSlider';
 import { TabsDemo } from '@/app/_Components/ProductTab/ProdcutTab';
-
+import ProductSwiper from '@/app/_Components/ProductSliderTwo/ProductSliderTwo';
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
 export default async function products(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
@@ -16,6 +18,8 @@ export default async function products(props: { params: Promise<{ id: string }> 
     return Math.round(((price - priceAfterDiscount) / price) * 100);
   }
   const singleProduct = await getSingleProduct(id);
+  // جلب المنتجات من نفس subcategory
+  const relatedProducts = await getSingleSubcategories(singleProduct.subcategory[0]._id);
   return (
     <>
       <section className="py-6">
@@ -134,7 +138,7 @@ export default async function products(props: { params: Promise<{ id: string }> 
         </div>
       </section>
       <section className="py-10">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 relative">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-3">
               <div className="h-8 w-1.5 bg-linear-to-b from-emerald-500 to-emerald-700 rounded-full"></div>
@@ -143,6 +147,7 @@ export default async function products(props: { params: Promise<{ id: string }> 
               </h2>
             </div>
           </div>
+          <ProductSwiper products={relatedProducts} />
         </div>
       </section>
     </>
