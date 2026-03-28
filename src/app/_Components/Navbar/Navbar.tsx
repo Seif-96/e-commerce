@@ -70,14 +70,14 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                  href='/login'
+                  href="/login"
                 >
                   <FiUser />
                   <span>Sign In</span>
                 </Link>
                 <Link
                   className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                  href='/register'
+                  href="/register"
                 >
                   <FaUserPlus />
                   <span>Sign Up</span>
@@ -130,16 +130,16 @@ export default function Navbar() {
                           <Link href="/categories">All Categories</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href="/">Electronics</Link>
+                          <Link href={`/categories/electronics`}>Electronics</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href="/">{"Women's Fashion"}</Link>
+                          <Link href={`/categories/women-fashion`}>{"Women's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href="/">{"Men's Fashion"}</Link>
+                          <Link href={`/categories/man-`}>{"Men's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href="/">Beauty & Health</Link>
+                          <Link href={`/categories/beauty-health`}>Beauty & Health</Link>
                         </li>
                       </ul>
                     </NavigationMenuContent>
@@ -296,7 +296,9 @@ export default function Navbar() {
                           <FaHeadset className="text-lg text-green-600" />
                         </div>
                         <div>
-                          <div className="text-sm font-semibold text-start text-gray-700">Need Help?</div>
+                          <div className="text-sm font-semibold text-start text-gray-700">
+                            Need Help?
+                          </div>
                           <div className="text-sm text-green-600">Contact Support</div>
                         </div>
                       </Link>
