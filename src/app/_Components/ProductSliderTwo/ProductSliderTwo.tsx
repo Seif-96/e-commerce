@@ -30,9 +30,8 @@ export default function ProductSwiper({ products }: { products: any[] }) {
         onSwiper={(swiper) => (swiperRef.current = swiper)} // حفظ instance
         modules={[Navigation]}
         spaceBetween={16}
-        slidesPerView={2}
+        slidesPerView={1}
         breakpoints={{
-          480: { slidesPerView: 1 },
           640: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
