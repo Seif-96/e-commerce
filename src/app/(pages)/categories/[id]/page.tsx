@@ -3,14 +3,16 @@ import React from 'react';
 import { FaFolderOpen } from 'react-icons/fa6';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { FaLongArrowAltRight } from 'react-icons/fa';
-import { getAllsubcategories, getSingleCategory, getSingleSubcategories } from '@/api/services/routemisr.service';
+import { getAllsubcategories, getSingleCategory } from '@/api/services/routemisr.service';
 
 export default async function category(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
   const subcategories = await getAllsubcategories();
   const category = await getSingleCategory(id);
-  // const singleSubcategories = await getSingleSubcategories(subcategories.id)
+
+  
+
   return (
     <>
       <section>
@@ -31,7 +33,7 @@ export default async function category(props: { params: Promise<{ id: string }> 
               {subcategories?.map((category) => (
                 <Link
                   key={category._id}
-                  href="/singleSubcategories/${category._id}"
+                  href={`/singleSubcategories/${category._id}`}
                   className="group bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-xl hover:border-green-200 transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="w-14 h-14 rounded-xl bg-green-50 flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors">

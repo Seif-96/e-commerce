@@ -64,12 +64,12 @@ export async function getAllsubcategories(): Promise<Subcategory[] | undefined> 
     return undefined;
   }
 }
-export async function getSingleSubcategories(id: string): Promise<Subcategory[] | undefined> {
+export async function getSingleSubcategories(id: string): Promise<Root2[]> {
   try {
-    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/subcategories/${id}`);
+    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products?subcategory=${id}`);
     const data = await res.json();
     return data.data;
   } catch {
-    return undefined;
+    return [];
   }
 }

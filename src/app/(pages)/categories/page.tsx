@@ -10,7 +10,7 @@ export default async function categories() {
     <div className="container mx-auto px-4 py-10">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
         {allCategory?.map((category) => (
-          <Link key={category._id} href={`/categories/${category._id}`} className="">
+          <Link key={category._id} href={`/categories/${category._id}`}>
             <div className="group bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 shadow-sm hover:shadow-xl hover:border-green-200 transition-all duration-300 hover:-translate-y-1">
               <div className="aspect-square rounded-xl overflow-hidden bg-gray-50 mb-4">
                 <Image

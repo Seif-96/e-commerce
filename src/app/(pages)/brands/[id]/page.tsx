@@ -2,9 +2,9 @@ import { getSingleBrands } from '@/api/services/routemisr.service';
 import ProdictCart from '@/app/_Components/Home/ProductCart/ProdictCart';
 import { IoMdClose } from 'react-icons/io';
 import { FaTags } from 'react-icons/fa6';
+import { FaFilter } from 'react-icons/fa';
 import Link from 'next/link';
 import React from 'react';
-import { FaFilter } from 'react-icons/fa';
 import NoBroductsFound from '@/app/_Components/NoBroductsFound/NoBroductsFound';
 export default async function page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
