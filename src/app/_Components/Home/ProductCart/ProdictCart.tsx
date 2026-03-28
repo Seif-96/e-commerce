@@ -30,7 +30,6 @@ export default function ProdictCart({ product }: { product: Root2 }) {
             </span>
           </div>
         )}
-        {/* make this use clinte */}
         <div className="absolute top-3 right-3 flex flex-col space-y-2">
           <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-gray-600 hover:text-red-500">
             <FaRegHeart />

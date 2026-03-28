@@ -73,3 +73,10 @@ export async function getSingleSubcategories(id: string): Promise<Root2[]> {
     return [];
   }
 }
+export async function getProductsByCategory(id: string) {
+  const res = await fetch(
+    `https://ecommerce.routemisr.com/api/v1/products?category=${id}`
+  );
+  const data = await res.json();
+  return data.data;
+}

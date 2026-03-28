@@ -6,7 +6,7 @@ export default function loading() {
       <section className="py-6 animate-pulse">
         <div className="container mx-auto px-4">
           <div className="flex flex-col itms-center justify-center gap-4 min-h-screen">
-            <LoadingIndicator type="dot-circle" size="md" color="text-green-500" label="Loading Products..." />
+            <LoadingIndicator type="dot-circle" size="md" color="text-green-500" label="Loading subcategories..." />
           </div>
         </div>
       </section>

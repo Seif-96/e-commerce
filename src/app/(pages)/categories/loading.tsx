@@ -3,10 +3,10 @@ import React from 'react';
 export default function loading() {
   return (
     <>
-      <section className="py-6 animate-pulse vh-100">
-        <div className="container mx-auto px-4 vh-100">
-          <div className="flex flex-col itms-center justify-center gap-4 vh-100">
-            <LoadingIndicator type="dot-circle" size="md" label="Loading Categories..." />
+      <section className="py-6 animate-pulse">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col itms-center justify-center gap-4 min-h-screen">
+            <LoadingIndicator type="dot-circle" size="md" color="text-green-500" label="Loading Categories..." />
           </div>
         </div>
       </section>

@@ -88,7 +88,6 @@ export default function loading() {
           </div>
         </div>
       </section>
-
       {/* Tabs Skeleton */}
       <section className="py-8 animate-pulse">
         <div className="container mx-auto px-4">
