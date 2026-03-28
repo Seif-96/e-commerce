@@ -32,7 +32,7 @@ export default function ProductSwiper({ products }: { products: any[] }) {
         spaceBetween={16}
         slidesPerView={1}
         breakpoints={{
-          640: { slidesPerView: 2 },
+          480: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
           1280: { slidesPerView: 5 },
