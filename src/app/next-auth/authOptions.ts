@@ -1,5 +1,6 @@
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import { jwtDecode } from 'jwt-decode';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -22,20 +23,37 @@ export const authOptions: NextAuthOptions = {
             headers: { 'Content-Type': 'application/json' },
           });
           const result = await res.json();
-          console.log('result', result);
+          // console.log('result', result);
           if (!res.ok) {
-            throw new Error(result.message || 'Authentication failed');
+            throw new Error(result.message);
           }
+          const jwt: { id: string } = jwtDecode(result.token);
           return {
-            id:"",
-            name  : result.user.name,
-            email : result.user.email,
+            id: jwt.id,
+            name: result.user.name,
+            email: result.user.email,
+            accessToken: result.token,
           };
-        } catch (error) {
-          return null;
+        } catch (err) {
+          throw new Error((err as Error).message);
         }
       },
     }),
   ],
-  // Add any additional NextAuth options here
+  callbacks: {
+    jwt(param) {
+      if (param.user) {
+        param.token.routeToken = param.user.accessToken;
+        param.token.id = param.user.id;
+      }
+      return param.token;
+    },
+    session({ token, session }) {
+      session.id = token.id;
+      return session;
+    },
+  },
+  pages: {
+    signIn: '/login',
+  },
 };

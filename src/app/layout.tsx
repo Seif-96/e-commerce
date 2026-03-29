@@ -4,16 +4,7 @@ import './globals.css';
 import Navbar from './_Components/Navbar/Navbar';
 import Footer from './_Components/Footer/Footer';
 import { Toaster } from '@/components/ui/sonner';
-
-// const geistSans = Geist({
-//   variable: '--font-geist-sans',
-//   subsets: ['latin'],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin'],
-// });
+import MyProvider from './_Components/MyProvider/MyProvider';
 const exo = Exo({
   variable: '--font-exo',
   subsets: ['latin'],
@@ -31,17 +22,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${exo.className} antialiased`}>
-        <Navbar />
-        <Toaster
-          position="top-right"
-          richColors
-          toastOptions={{
-            duration: 4000,
-            className: 'custom-toast',
-          }}
-        />
-        {children}
-        <Footer />
+        <MyProvider>
+          <Navbar />
+          <Toaster
+            position="top-right"
+            richColors
+            toastOptions={{
+              duration: 4000,
+              className: 'custom-toast',
+            }}
+          />
+          {children}
+          <Footer />
+        </MyProvider>
       </body>
     </html>
   );

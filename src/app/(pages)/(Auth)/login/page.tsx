@@ -20,10 +20,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { LoginSchema, LoginSchemaType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { userLogin } from '@/actions/auth.action';
 import { toast } from 'sonner';
 import { FaEye } from 'react-icons/fa6';
 import { FaEyeSlash } from 'react-icons/fa';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const router = useRouter();
@@ -38,15 +38,15 @@ export default function Login() {
   });
   const { handleSubmit } = form;
   async function mySubmit(data: LoginSchemaType) {
+    const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
     setLoading(true);
-    const isAccountSuccess = await userLogin(data);
-    if (isAccountSuccess) {
+    if (response?.ok) {
       toast.success('Login Successfully');
       setTimeout(() => {
         router.push('/');
       }, 1500);
     } else {
-      toast.error('Validation errors');
+      toast.error(response?.error);
     }
     setLoading(false);
   }

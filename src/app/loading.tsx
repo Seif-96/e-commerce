@@ -7,6 +7,7 @@ export default function Loading() {
    const pathname = usePathname();
   if (pathname === "/login") return null;
   if (pathname === "/register") return null;
+  if (pathname === "/contact") return null;
   if (pathname === "/wish-list") return null;
   if (pathname === "/cart") return null;
   return (

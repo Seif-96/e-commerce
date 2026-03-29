@@ -17,6 +17,8 @@ import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { FaBars } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
+import { FaRightFromBracket } from 'react-icons/fa6';
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -32,8 +34,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-
+import { signOut, useSession } from 'next-auth/react';
 export default function Navbar() {
+  const { data: myData, status } = useSession();
+  function mySignOut() {
+    signOut({ redirect: true, callbackUrl: '/login' });
+  }
   return (
     <>
       <div className="hidden lg:block text-sm border-b border-gray-100">
@@ -68,20 +74,41 @@ export default function Navbar() {
               </div>
               <span className="w-px h-4 bg-gray-200"></span>
               <div className="flex items-center gap-4">
-                <Link
-                  className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                  href="/login"
-                >
-                  <FiUser />
-                  <span>Sign In</span>
-                </Link>
-                <Link
-                  className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                  href="/register"
-                >
-                  <FaUserPlus />
-                  <span>Sign Up</span>
-                </Link>
+                {status === 'unauthenticated' ? (
+                  <>
+                    <Link
+                      className="flex items-center gap-2 hover:text-green-600 transition-colors"
+                      href="/login"
+                    >
+                      <FiUser />
+                      <span>Sign In</span>
+                    </Link>
+                    <Link
+                      className="flex items-center gap-2 hover:text-green-600 transition-colors"
+                      href="/register"
+                    >
+                      <FaUserPlus />
+                      <span>Sign Up</span>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      className="flex items-center gap-1.5 text-gray-600 hover:text-green-600 transition-colors"
+                      href="/profile"
+                    >
+                      <FiUser className="text-md" />
+                      <span>{myData?.user?.name}</span>
+                    </Link>
+                    <button
+                      onClick={mySignOut}
+                      className="flex items-center gap-1.5 text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
+                    >
+                      <FaRightFromBracket className="text-xs" />
+                      <span>Sign Out</span>
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -180,13 +207,28 @@ export default function Navbar() {
               >
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
               </Link>
-              <Link
-                href="/login"
-                className="hidden lg:flex items-center gap-2 ml-2 px-5 py-2.5 rounded-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-colors shadow-sm shadow-green-600/20"
-              >
-                <FiUser />
-                Sign In
-              </Link>
+              {/* lock hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk */}
+              {status === 'unauthenticated' ? (
+                <>
+                  <Link
+                    href="/login"
+                    className="hidden lg:flex items-center gap-2 ml-2 px-5 py-2.5 rounded-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-colors shadow-sm shadow-green-600/20"
+                  >
+                    <FiUser />
+                    Sign In
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={mySignOut}
+                    className="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
+                  >
+                    <FaRightFromBracket className="text-xs" />
+                    <span>Sign Out</span>
+                  </button>
+                </>
+              )}
               <Sheet>
                 <SheetTrigger className="lg:hidden cursor-pointer ml-1 w-10 h-10 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center transition-colors">
                   <FaBars />
@@ -277,16 +319,44 @@ export default function Navbar() {
                         </Link>
                       </SheetClose>
                     </div>
-                    <div className="space-y-1">
-                      <div className="grid grid-cols-2 gap-3 pt-2">
-                        <SheetClose className="flex items-center cursor-pointer justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors">
-                          <Link href="/login">Sign In</Link>
-                        </SheetClose>
-                        <SheetClose className="flex items-center cursor-pointer justify-center gap-2 px-4 py-3 rounded-xl border-2 border-green-600 text-green-600 font-semibold hover:bg-green-50 transition-colors">
-                          <Link href="/register">Sign Up</Link>
-                        </SheetClose>
-                      </div>
-                    </div>
+                    {status === 'unauthenticated' ? (
+                      <>
+                        <div className="space-y-1">
+                          <div className="grid grid-cols-2 gap-3 pt-2">
+                            <SheetClose className="flex items-center cursor-pointer justify-center gap-2 px-4 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors">
+                              <Link href="/login">Sign In</Link>
+                            </SheetClose>
+                            <SheetClose className="flex items-center cursor-pointer justify-center gap-2 px-4 py-3 rounded-xl border-2 border-green-600 text-green-600 font-semibold hover:bg-green-50 transition-colors">
+                              <Link href="/register">Sign Up</Link>
+                            </SheetClose>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-4 space-y-1">
+                          <Link
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
+                            href="/profile"
+                          >
+                            <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
+                              <FiUser className="text-gray-500" />
+                            </div>
+                            <span className="font-medium text-gray-700">{myData?.user?.name}</span>
+                          </Link>
+                          <button
+                            onClick={mySignOut}
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 transition-colors w-full text-left cursor-pointer"
+                          >
+                            <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center">
+                              <FaRightFromBracket className="text-red-500" />
+                            </div>
+                            <span className="font-medium text-red-600">Sign Out</span>
+                          </button>
+                        </div>
+                      </>
+                    )}
+
                     <SheetClose>
                       <Link
                         href="/contact"
