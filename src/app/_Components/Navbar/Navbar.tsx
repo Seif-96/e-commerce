@@ -207,7 +207,7 @@ export default function Navbar() {
               >
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
               </Link>
-              {/* lock hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk */}
+              {/* lock hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee */}
               {status === 'unauthenticated' ? (
                 <>
                   <Link
