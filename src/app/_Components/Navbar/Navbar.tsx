@@ -170,7 +170,7 @@ export default function Navbar() {
                           <Link href="/categories">All Categories</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/categories/electronics`}>Electronics</Link>
+                          <Link href={`/category/6439d58a0049ad0b52b9003f`}>Electronics</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
                           <Link href={`/categories/women-fashion`}>{"Women's Fashion"}</Link>
