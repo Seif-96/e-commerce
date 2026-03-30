@@ -10,6 +10,8 @@ export default function Loading() {
   if (pathname === "/contact") return null;
   if (pathname === "/wish-list") return null;
   if (pathname === "/cart") return null;
+  if (pathname === "/profile/addresses") return null;
+  if (pathname === "/profile/settings") return null;
   return (
     <>
       {/* Slider Skeleton */}

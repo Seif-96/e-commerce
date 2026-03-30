@@ -65,7 +65,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 gap-lg-12 text-gray-400">
             <div className="lg:col-span-4">
               <div className="bg-[#FFFFFF] py-2 px-4 w-fit rounded-lg mb-6">
-                <Image className="w-auto" src={logo} alt="freshcart"/>
+                <Image className="w-auto" src={logo} alt="freshcart" />
               </div>
               <p className="mb-6 text-sm">
                 FreshCart is your one-stop destination for quality products. From fashion to
@@ -128,13 +128,13 @@ export default function Footer() {
                   <Link href="/brands">Brands</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Electronics</Link>
+                  <Link href="/categories/electronics">Electronics</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">{"Men's Fashion"}</Link>
+                  <Link href="/categories/man-fashion">{"Men's Fashion"}</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">{"Women's Fashion"}</Link>
+                  <Link href="/categories/women-fashion">{"Women's Fashion"}</Link>
                 </li>
               </ul>
             </div>
@@ -142,10 +142,10 @@ export default function Footer() {
               <h3 className="font-semibold text-white text-lg mb-5">Account</h3>
               <ul className="space-y-3 text-sm">
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="/profile">My Account</Link>
+                  <Link href="/profile/addresses">My Account</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="#">Order History</Link>
+                  <Link href="/profile/orders">Order History</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
                   <Link href="/wish-list">Wishlist</Link>

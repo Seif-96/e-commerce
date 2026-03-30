@@ -108,7 +108,7 @@ export default function Navbar() {
                   <>
                     <Link
                       className="flex items-center gap-1.5 text-gray-600 hover:text-green-600 transition-colors"
-                      href="/profile"
+                      href="/profile/addresses"
                     >
                       <FiUser className="text-md" />
                       <span>{myData?.user?.name}</span>
@@ -176,7 +176,7 @@ export default function Navbar() {
                           <Link href={`/categories/women-fashion`}>{"Women's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/categories/man-`}>{"Men's Fashion"}</Link>
+                          <Link href={`/categories/man-fashion`}>{"Men's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
                           <Link href={`/categories/beauty-health`}>Beauty & Health</Link>
@@ -247,14 +247,19 @@ export default function Navbar() {
                           <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                             <FaRegUserCircle className="text-xl text-green-600" />
                           </div>
-                          <p className="text-sm font-semibold text-gray-800 truncate">
+                    <div>
+                            <p className="text-sm font-semibold text-gray-800 truncate">
                             {myData?.user?.name}
                           </p>
+                            <p className="font-semibold text-gray-500 truncate">
+                            {myData?.user?.email}
+                          </p>
+                    </div>
                         </DropdownMenuLabel>
                         <DropdownMenuItem>
                           <Link
                             className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
-                            href="/profile"
+                            href="/profile/addresses"
                           >
                             <FiUser className="w-4 text-gray-400" />
                             My Profile
@@ -419,7 +424,7 @@ export default function Navbar() {
                           <SheetClose>
                             <Link
                               className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
-                              href="/profile"
+                              href="/profile/addresses"
                             >
                               <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
                                 <FiUser className="text-gray-500" />

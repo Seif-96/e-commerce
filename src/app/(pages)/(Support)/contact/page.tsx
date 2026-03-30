@@ -40,8 +40,8 @@ export default function contact() {
             </div>
           </div>
           <div className="container mx-auto px-4 py-12">
-            <div className="flex flex-col lg:flex-row gap-8">
-              <div className="flex-2 space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-1 space-y-6">
                 <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
@@ -138,7 +138,7 @@ export default function contact() {
                   </div>
                 </div>
               </div>
-              <div className="flex-1">
+              <div className="lg:col-span-2">
                 <div className="bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 shadow-sm">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
@@ -226,7 +226,7 @@ export default function contact() {
                       ></textarea>
                     </div>
                     <button
-                      type="button"
+                      type="submit"
                       className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-green-500 text-white font-semibold hover:bg-green-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed shadow-sm shadow-green-500/20 cursor-pointer"
                     >
                       <IoIosSend />
