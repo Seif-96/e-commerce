@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Implement your authentication logic here
         try {
           const res = await fetch(`https://ecommerce.routemisr.com/api/v1/auth/signin`, {
@@ -57,6 +57,5 @@ export const authOptions: NextAuthOptions = {
     signIn: '/login',
   },
   // NEXTAUTH_SECRET
- 
+  secret: process.env.NEXTAUTH_SECRET,
 };
-

@@ -1,10 +1,10 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function proxy(requset: NextRequest, url: string) {
+export async function proxy(requset: NextRequest) {
   const protectedRoutes = [
     '/profile/addresses',
-    '/profile/addresses',
+    '/profile/settinges',
     '/profile/orders',
     '/checkout',
     '/allorders',
@@ -16,8 +16,7 @@ export async function proxy(requset: NextRequest, url: string) {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === 'production',
   });
-  const token = myToken?.accessToken;
-  // if(token&&protectedRoutes.includes(myPath)){}
+  const token = myToken?.routeToken;
   if (!token && protectedRoutes.some((path) => myPath.startsWith(path))) {
     return NextResponse.redirect(new URL('/login', requset.url));
   }
@@ -30,7 +29,7 @@ export const config = {
   // matcher: '/about/:path*',
   matcher: [
     '/profile/addresses/:path*',
-    '/profile/addresses/:path*',
+    '/profile/settinges/:path*',
     '/profile/orders/:path*',
     '/checkout/:path*',
     '/allorders/:path*',
