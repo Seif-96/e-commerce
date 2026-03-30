@@ -18,7 +18,18 @@ import { Input } from '@/components/ui/input';
 import { FaBars } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { FaRightFromBracket } from 'react-icons/fa6';
-
+import { FaBoxOpen } from 'react-icons/fa';
+import { FaRegAddressBook } from 'react-icons/fa';
+import { IoMdSettings } from 'react-icons/io';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -35,6 +46,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { signOut, useSession } from 'next-auth/react';
+import { FaRegUserCircle } from 'react-icons/fa';
+
 export default function Navbar() {
   const { data: myData, status } = useSession();
   function mySignOut() {
@@ -207,7 +220,6 @@ export default function Navbar() {
               >
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
               </Link>
-              {/* lock hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk */}
               {status === 'unauthenticated' ? (
                 <>
                   <Link
@@ -220,13 +232,83 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <button
-                    onClick={mySignOut}
-                    className="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
-                  >
-                    <FaRightFromBracket className="text-xs" />
-                    <span>Sign Out</span>
-                  </button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-green-600 transition-colors cursor-pointer">
+                      <Button
+                        variant="outline"
+                        className="p-2.5 w-10 h-10 rounded-full hover:bg-gray-100 transition-colors group border-0"
+                      >
+                        <FaRegUserCircle className="text-xltext-gray-500 group-hover:text-green-600 transition-colors" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuGroup>
+                        <DropdownMenuLabel className="flex items-center gap-3 p-4 border-b border-gray-100">
+                          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <FaRegUserCircle className="text-xl text-green-600" />
+                          </div>
+                          <p className="text-sm font-semibold text-gray-800 truncate">
+                            {myData?.user?.name}
+                          </p>
+                        </DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <Link
+                            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
+                            href="/profile"
+                          >
+                            <FiUser className="w-4 text-gray-400" />
+                            My Profile
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Link
+                            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
+                            href="/orders"
+                          >
+                            <FaBoxOpen className="w-4 text-gray-400" />
+                            My Orders
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Link
+                            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
+                            href="/wish-list"
+                          >
+                            <FaRegHeart className="w-4 text-gray-400" />
+                            My Wishlist
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Link
+                            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
+                            href="/profile/addresses"
+                          >
+                            <FaRegAddressBook className="w-4 text-gray-400" />
+                            Addresses
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Link
+                            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
+                            href="/profile/settings"
+                          >
+                            <IoMdSettings className="w-4 text-gray-400" />
+                            Settings
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <button
+                          onClick={mySignOut}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors w-full text-left cursor-pointer"
+                        >
+                          <FaRightFromBracket className="text-xs" />
+                          <span>Sign Out</span>
+                        </button>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </>
               )}
               <Sheet>
@@ -252,7 +334,6 @@ export default function Navbar() {
                         </Button>
                       </Field>
                     </form>
-
                     <nav>
                       <div className="space-y-1 flex flex-col">
                         <SheetClose>
@@ -334,29 +415,34 @@ export default function Navbar() {
                       </>
                     ) : (
                       <>
-                        <div className="p-4 space-y-1">
-                          <Link
-                            className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
-                            href="/profile"
-                          >
-                            <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
-                              <FiUser className="text-gray-500" />
-                            </div>
-                            <span className="font-medium text-gray-700">{myData?.user?.name}</span>
-                          </Link>
-                          <button
-                            onClick={mySignOut}
-                            className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 transition-colors w-full text-left cursor-pointer"
-                          >
-                            <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center">
-                              <FaRightFromBracket className="text-red-500" />
-                            </div>
-                            <span className="font-medium text-red-600">Sign Out</span>
-                          </button>
+                        <div className="flex flex-col space-y-1 border-t border-gray-100 py-4">
+                          <SheetClose>
+                            <Link
+                              className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-50 transition-colors"
+                              href="/profile"
+                            >
+                              <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
+                                <FiUser className="text-gray-500" />
+                              </div>
+                              <span className="font-medium text-gray-700">
+                                {myData?.user?.name}
+                              </span>
+                            </Link>
+                          </SheetClose>
+                          <SheetClose>
+                            <button
+                              onClick={mySignOut}
+                              className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 transition-colors w-full text-left cursor-pointer"
+                            >
+                              <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center">
+                                <FaRightFromBracket className="text-red-500" />
+                              </div>
+                              <span className="font-medium text-red-600">Sign Out</span>
+                            </button>
+                          </SheetClose>
                         </div>
                       </>
                     )}
-
                     <SheetClose>
                       <Link
                         href="/contact"
