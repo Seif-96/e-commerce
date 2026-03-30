@@ -1,7 +1,35 @@
-import React from 'react'
+'use client';
+// import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import React from 'react';
+import { FaBoxOpen } from 'react-icons/fa';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
-export default function cart() {
+export default function Cart() {
+  // const { data: myData, status } = useSession();
   return (
-    <div>cart</div>
-  )
+    <>
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
+        <div className="max-w-sm mx-auto text-center">
+          <div className="relative mb-8">
+            <div className="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center mx-auto">
+              <FaBoxOpen className="text-5xl text-gray-300" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
+          <p className="text-gray-500 mb-8 text-sm font-medium leading-relaxed">
+            Looks like you haven&apos;t added anything to your cart yet.
+            <br />
+            Start exploring ourproducts!
+          </p>
+          <Link
+            className="inline-flex items-center gap-2 bg-green-600 text-white py-3.5 px-8 rounded-xl font-semibold hover:bg-green-700 transition-all shadow-lg active:scale-[0.98]"
+            href="/"
+          >
+            Start Shopping <FaArrowRightLong />
+          </Link>
+        </div>
+      </div>
+    </>
+  );
 }
