@@ -13,9 +13,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FaCheck } from 'react-icons/fa';
 import { toast } from 'sonner';
 import { FaKey } from 'react-icons/fa';
-
+// import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,7 @@ export default function Login() {
     // if (response?.ok) {
     //   toast.success('Reset code sent to your email!');
     //   setTimeout(() => {
-    //     router.push('/forget-password/otp');
+    //     router.push('/forget-password/new-password');
     //   }, 1500);
     // } else {
     //   toast.error(response?.error);
@@ -97,18 +98,18 @@ export default function Login() {
                       Fresh<span className="text-gray-800">Cart</span>
                     </span>
                   </div>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-2">Forgot Password?</h1>
-                  <p className="text-gray-600">No worries, we&apos;ll send you a reset code</p>
+                  <h1 className="text-2xl font-bold text-gray-800 mb-2">Check Your Email</h1>
+                  <p className="text-gray-600">Enter the 6-digit code sent to {/*enter email*/}</p>
                 </div>
                 <div className="flex items-center justify-center mb-8">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-green-600 text-white ring-4 ring-green-100">
-                      <MdEmail />
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-green-600 text-white">
+                      <FaCheck />
                     </div>
-                    <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-gray-200"></div>
+                    <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-green-600"></div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-gray-100 text-gray-400">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-green-600 text-white ring-4 ring-green-100">
                       <FaKey />
                     </div>
                     <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-gray-200"></div>
@@ -121,24 +122,36 @@ export default function Login() {
                 </div>
                 <form onSubmit={handleSubmit(mySubmit)} className="space-y-6 text-[#364153]">
                   <div className="relative flex flex-col gap-2">
-                    <MdEmail className="absolute left-4 top-9.5 text-xl text-gray-400" />
+                    <FaShieldAlt className="absolute left-4 top-11.5 text-xl text-gray-400" />
                     <Controller
                       name="email"
                       control={form.control}
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor="email">Email Address</FieldLabel>
+                          <FieldLabel htmlFor="otp">Verification Code</FieldLabel>
                           <Input
                             {...field}
-                            id="email"
-                            className="pl-10! py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
+                            id="otp"
+                            maxLength={6}
+                            className="w-full! px-4! py-7! pl-12! border-2! border-gray-200! rounded-xl! focus:outline-none! focus:border-green-500! focus:ring-2! focus:ring-green-100! transition-all! text-center! text-2xl! tracking-[0.5em]! font-mono!"
                             aria-invalid={fieldState.invalid}
-                            placeholder="Enter your email"
+                            placeholder="••••••"
                           />
                           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                         </Field>
                       )}
                     />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-gray-500">
+                      Didn&apos;t receive the code?{' '}
+                      <button
+                        type="button"
+                        className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
+                      >
+                        Resend Code
+                      </button>
+                    </p>
                   </div>
                   <Button
                     type="submit"
@@ -148,35 +161,24 @@ export default function Login() {
                     {loading ? (
                       <>
                         <SpinnerCustom />
-                        <span>Sending Code...</span>
+                        <span>Verifying Code...</span>
                       </>
                     ) : (
                       <>
-                        <span>Send Reset Code</span>
+                        <span>Verify Code</span>
                       </>
                     )}
                   </Button>
                   <div className="text-center">
                     <Link
-                      className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
-                      href="/login"
+                      className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-green-600 font-medium transition-colors"
+                      href="/forget-password"
                     >
                       <FaArrowLeft className="text-xs" />
-                      Back to Sign In
+                      Change email address
                     </Link>
                   </div>
                 </form>
-                <div className="text-center mt-8 pt-6 border-t border-gray-100">
-                  <p className="text-gray-600">
-                    Remember your password?{' '}
-                    <Link
-                      className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
-                      href="/login"
-                    >
-                      Sign In
-                    </Link>
-                  </p>
-                </div>
               </div>
             </div>
           </div>

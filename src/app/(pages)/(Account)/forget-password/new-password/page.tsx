@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { FaArrowLeft, FaTruck } from 'react-icons/fa';
+import { FaTruck } from 'react-icons/fa';
 import { FaShieldAlt } from 'react-icons/fa';
 import { IoLockClosed } from 'react-icons/io5';
 import { MdEmail } from 'react-icons/md';
@@ -11,28 +11,34 @@ import { SpinnerCustom } from '@/app/_Components/ButtonSpinner/ButtonSpinner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/auth.schema';
+import { NewPasswordSchema, NewPasswordSchemaType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
-import { FaKey } from 'react-icons/fa';
+import { FaCheck } from "react-icons/fa6";
 
+import { toast } from 'sonner';
+import { FaEye } from 'react-icons/fa6';
+import { FaEyeSlash } from 'react-icons/fa';
+import { FaKey } from 'react-icons/fa';
 export default function Login() {
+  const [showPasswordTwo, setShowPasswordTwo] = useState(false);
+  const [showPasswordThere, setShowPasswordThere] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const form = useForm<forgotPasswordSchemaType>({
+  const form = useForm<NewPasswordSchemaType>({
     defaultValues: {
-      email: '',
+      newPassword: '',
+      rePassword: '',
     },
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(NewPasswordSchema),
   });
-  const { handleSubmit } = form;
-  async function mySubmit(data: forgotPasswordSchemaType) {
+  const { handleSubmit: handlePasswordSubmit, control: passwordControl } = form;
+  async function mySubmit(data: NewPasswordSchemaType) {
     // const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
     // setLoading(true);
     // if (response?.ok) {
-    //   toast.success('Reset code sent to your email!');
+    //   toast.success('');
     //   setTimeout(() => {
-    //     router.push('/forget-password/otp');
+    //     router.push('/login');
     //   }, 1500);
     // } else {
     //   toast.error(response?.error);
@@ -102,40 +108,77 @@ export default function Login() {
                 </div>
                 <div className="flex items-center justify-center mb-8">
                   <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-green-600 text-white">
+                      <FaCheck />
+                    </div>
+                    <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-green-600"></div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-green-600 text-white">
+                      <FaCheck />
+                    </div>
+                    <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-green-600"></div>
+                  </div>
+                  <div className="flex items-center">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-green-600 text-white ring-4 ring-green-100">
-                      <MdEmail />
-                    </div>
-                    <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-gray-200"></div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-gray-100 text-gray-400">
-                      <FaKey />
-                    </div>
-                    <div className="w-16 h-0.5 mx-2 transition-all duration-300 bg-gray-200"></div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 bg-gray-100 text-gray-400">
                       <IoLockClosed />
                     </div>
                   </div>
                 </div>
-                <form onSubmit={handleSubmit(mySubmit)} className="space-y-6 text-[#364153]">
+                <form
+                  onSubmit={handlePasswordSubmit(mySubmit)}
+                  className="space-y-6 text-[#364153]"
+                >
                   <div className="relative flex flex-col gap-2">
-                    <MdEmail className="absolute left-4 top-9.5 text-xl text-gray-400" />
+                    <IoLockClosed className="absolute left-4 top-10.5 text-xl text-gray-400" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPasswordTwo(!showPasswordTwo)}
+                      className="absolute right-4 top-10.5 text-xl cursor-pointer text-gray-400 hover:text-gray-600"
+                    >
+                      {showPasswordTwo ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                     <Controller
-                      name="email"
-                      control={form.control}
+                      name="newPassword"
+                      control={passwordControl}
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor="email">Email Address</FieldLabel>
+                          <FieldLabel htmlFor="password">New Password</FieldLabel>
                           <Input
                             {...field}
-                            id="email"
-                            className="pl-10! py-5! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]"
+                            id="password"
+                            type={showPasswordTwo ? 'text' : 'password'}
                             aria-invalid={fieldState.invalid}
-                            placeholder="Enter your email"
+                            placeholder="Enter your new password"
+                            className="py-6! pl-12! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]!"
                           />
-                          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        </Field>
+                      )}
+                    />
+                  </div>
+                  <div className="relative flex flex-col gap-2">
+                    <IoLockClosed className="absolute left-4 top-10.5 text-xl text-gray-400" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPasswordThere(!showPasswordThere)}
+                      className="absolute right-4 top-10.5 text-xl cursor-pointer text-gray-400 hover:text-gray-600"
+                    >
+                      {showPasswordThere ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                    <Controller
+                      name="rePassword"
+                      control={passwordControl}
+                      render={({ field, fieldState }) => (
+                        <Field data-invalid={fieldState.invalid}>
+                          <FieldLabel htmlFor="password">Confirm New Password</FieldLabel>
+                          <Input
+                            {...field}
+                            id="password"
+                            type={showPasswordThere ? 'text' : 'password'}
+                            aria-invalid={fieldState.invalid}
+                            placeholder="Confirm your new password"
+                            className="py-6! pl-12! rounded-md! border! border-gray-200! bg-gray-50/50 focus:bg-white! focus:outline-none! focus:ring-2! focus:ring-green-500/0! focus:border-green-500! transition-all! text-[16px]!"
+                          />
                         </Field>
                       )}
                     />
@@ -148,35 +191,15 @@ export default function Login() {
                     {loading ? (
                       <>
                         <SpinnerCustom />
-                        <span>Sending Code...</span>
+                        <span>Resetting Password...</span>
                       </>
                     ) : (
                       <>
-                        <span>Send Reset Code</span>
+                        <span>Reset Password</span>
                       </>
                     )}
                   </Button>
-                  <div className="text-center">
-                    <Link
-                      className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
-                      href="/login"
-                    >
-                      <FaArrowLeft className="text-xs" />
-                      Back to Sign In
-                    </Link>
-                  </div>
                 </form>
-                <div className="text-center mt-8 pt-6 border-t border-gray-100">
-                  <p className="text-gray-600">
-                    Remember your password?{' '}
-                    <Link
-                      className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
-                      href="/login"
-                    >
-                      Sign In
-                    </Link>
-                  </p>
-                </div>
               </div>
             </div>
           </div>
