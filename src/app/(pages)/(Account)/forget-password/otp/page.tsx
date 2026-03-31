@@ -11,35 +11,37 @@ import { SpinnerCustom } from '@/app/_Components/ButtonSpinner/ButtonSpinner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/auth.schema';
+import { otpSchema, OtpSchemaType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaCheck } from 'react-icons/fa';
 import { toast } from 'sonner';
 import { FaKey } from 'react-icons/fa';
+import { verifyResetCode } from '@/actions/auth.action';
 // import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const form = useForm<forgotPasswordSchemaType>({
+  const form = useForm<OtpSchemaType>({
     defaultValues: {
-      email: '',
+      otp: '',
     },
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(otpSchema),
   });
   const { handleSubmit } = form;
-  async function mySubmit(data: forgotPasswordSchemaType) {
-    // const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
-    // setLoading(true);
-    // if (response?.ok) {
-    //   toast.success('Reset code sent to your email!');
-    //   setTimeout(() => {
-    //     router.push('/forget-password/new-password');
-    //   }, 1500);
-    // } else {
-    //   toast.error(response?.error);
-    // }
-    // setLoading(false);
+async function mySubmit(data: OtpSchemaType) {
+  console.log('Submitting OTP:', data);
+  setLoading(true);
+  const response = await verifyResetCode(data);
+  if (response?.ok) {
+    toast.success('Reset code sent to your email!');
+    setTimeout(() => {
+      router.push('/forget-password/new-password');
+    }, 1500);
+  } else {
+    toast.error(response?.data?.message || response?.error);
   }
+  setLoading(false);
+}
   return (
     <>
       <section>
@@ -124,7 +126,7 @@ export default function Login() {
                   <div className="relative flex flex-col gap-2">
                     <FaShieldAlt className="absolute left-4 top-11.5 text-xl text-gray-400" />
                     <Controller
-                      name="email"
+                      name="otp"
                       control={form.control}
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>

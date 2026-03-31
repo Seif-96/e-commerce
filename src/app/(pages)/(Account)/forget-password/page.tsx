@@ -15,6 +15,7 @@ import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/auth.s
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { FaKey } from 'react-icons/fa';
+import { forgotPasswords } from '@/actions/auth.action';
 
 export default function Login() {
   const router = useRouter();
@@ -26,19 +27,22 @@ export default function Login() {
     resolver: zodResolver(forgotPasswordSchema),
   });
   const { handleSubmit } = form;
-  async function mySubmit(data: forgotPasswordSchemaType) {
-    // const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
-    // setLoading(true);
-    // if (response?.ok) {
-    //   toast.success('Reset code sent to your email!');
-    //   setTimeout(() => {
-    //     router.push('/forget-password/otp');
-    //   }, 1500);
-    // } else {
-    //   toast.error(response?.error);
-    // }
-    // setLoading(false);
+async function mySubmit(data: forgotPasswordSchemaType) {
+  setLoading(true);
+
+  const response = await forgotPasswords(data);
+
+  if (response?.ok) {
+    toast.success('Reset code sent to your email!');
+    setTimeout(() => {
+      router.push('/forget-password/otp');
+    }, 1500);
+  } else {
+    toast.error(response?.data?.message || response?.error);
   }
+
+  setLoading(false);
+}
   return (
     <>
       <section>

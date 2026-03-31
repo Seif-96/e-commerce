@@ -82,9 +82,6 @@ export const UpdatePersonalDetailsSchema = zod.object({
     .nonempty('*Please enter your phone number')
     .regex(/^(?:\+20|0)1[0125][0-9]{8}$/, '*Only Egyptian phone numbers are allowed'),
 });
-
-
-
 export const NewPasswordSchema = zod
   .object({
     newPassword: zod
@@ -105,9 +102,6 @@ export const NewPasswordSchema = zod
     message: 'New Password & rePassword not matched !',
     path: ['rePassword'],
   });
-
-
-
 export const LoginSchema = zod.object({
   email: zod.string().nonempty('*Please enter your email').email('*Invalid email address'),
   password: zod
@@ -126,6 +120,13 @@ export const LoginSchema = zod.object({
 export const forgotPasswordSchema = zod.object({
   email: zod.string().nonempty('*Please enter your email').email('Email is required'),
 });
+export const otpSchema = zod.object({
+  otp: zod
+    .string()
+    .length(6, '*OTP must be exactly 6 digits')
+    .regex(/^\d+$/, '*OTP must contain only numbers'),
+});
+export type OtpSchemaType = zod.infer<typeof otpSchema>;
 export type RegisterSchemaType = zod.infer<typeof RegisterSchema>;
 export type UpdatePasswordSchemaType = zod.infer<typeof UpdatePasswordSchema>;
 export type UpdatePersonalDetailsSchemaType = zod.infer<typeof UpdatePersonalDetailsSchema>;
