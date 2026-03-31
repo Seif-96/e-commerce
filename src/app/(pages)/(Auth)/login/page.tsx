@@ -38,8 +38,8 @@ export default function Login() {
   });
   const { handleSubmit } = form;
   async function mySubmit(data: LoginSchemaType) {
-    const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
     setLoading(true);
+    const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
     if (response?.ok) {
       toast.success('Login Successfully');
       setTimeout(() => {
@@ -189,7 +189,7 @@ export default function Login() {
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="btn bg-green-600 text-white hover:bg-green-700 py-5 w-full transition-colors cursor-pointer text-[16px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed!"
+                    className="btn bg-green-600 text-white hover:bg-green-700 py-5 w-full transition-colors cursor-pointer text-[16px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <>
