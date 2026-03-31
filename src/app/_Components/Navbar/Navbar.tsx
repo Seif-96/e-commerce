@@ -234,27 +234,24 @@ export default function Navbar() {
                 <>
                   <DropdownMenu>
                     <DropdownMenuTrigger className="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-green-600 transition-colors cursor-pointer">
-                      <Button
-                        variant="outline"
-                        className="p-2.5 w-10 h-10 rounded-full hover:bg-gray-100 transition-colors group border-0"
-                      >
+                      <div className="p-2.5 w-10 h-10 rounded-full hover:bg-gray-100 transition-colors group border-0">
                         <FaRegUserCircle className="text-xltext-gray-500 group-hover:text-green-600 transition-colors" />
-                      </Button>
+                      </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuGroup>
-                        <DropdownMenuLabel className="flex items-center gap-3 p-4 border-b border-gray-100">
+                        <DropdownMenuLabel className="flex items-center gap-3 p-4 border-b mb-1 border-gray-100">
                           <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                             <FaRegUserCircle className="text-xl text-green-600" />
                           </div>
-                    <div>
+                          <div>
                             <p className="text-sm font-semibold text-gray-800 truncate">
-                            {myData?.user?.name}
-                          </p>
+                              {myData?.user?.name}
+                            </p>
                             <p className="font-semibold text-gray-500 truncate">
-                            {myData?.user?.email}
-                          </p>
-                    </div>
+                              {myData?.user?.email}
+                            </p>
+                          </div>
                         </DropdownMenuLabel>
                         <DropdownMenuItem>
                           <Link
@@ -304,13 +301,13 @@ export default function Navbar() {
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
-                        <button
+                        <div
                           onClick={mySignOut}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors w-full text-left cursor-pointer"
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:text-red-500 hover:bg-red-50 transition-colors w-full text-left cursor-pointer"
                         >
                           <FaRightFromBracket className="text-xs" />
                           <span>Sign Out</span>
-                        </button>
+                        </div>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
