@@ -128,13 +128,17 @@ export default function Footer() {
                   <Link href="/brands">Brands</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="/categories/electronics">Electronics</Link>
+                  <Link href="/singleSubcategories/6407f3a8b575d3b90bf957e2">Electronics</Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="/categories/man-fashion">{"Men's Fashion"}</Link>
+                  <Link href="/singleSubcategories/6407f243b575d3b90bf957ac">
+                    {"Men's Fashion"}
+                  </Link>
                 </li>
                 <li className="hover:text-green-500 hover:cursor-pointer transition-colors">
-                  <Link href="/categories/women-fashion">{"Women's Fashion"}</Link>
+                  <Link href="/singleSubcategories/6407f1bcb575d3b90bf95797">
+                    {"Women's Fashion"}
+                  </Link>
                 </li>
               </ul>
             </div>

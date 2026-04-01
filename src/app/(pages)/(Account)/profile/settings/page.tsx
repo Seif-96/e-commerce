@@ -48,9 +48,14 @@ export default function Profile() {
   });
   const { handleSubmit: handleProfileSubmit, control: profileControl, reset: resetProfile } = form;
   const { handleSubmit: handlePasswordSubmit, control: passwordControl } = updataPassForm;
-
-  async function mySubmit(theData: UpdatePersonalDetailsSchemaType) {}
-  async function mySubmitTwo(newData: UpdatePasswordSchemaType) {}
+  // updateUserDetails
+  async function mySubmit(theData: UpdatePersonalDetailsSchemaType) {
+    // updateUserDetails
+  }
+  // change the Password
+  async function mySubmitTwo(newData: UpdatePasswordSchemaType) {
+    // changeMyPassword
+  }
   return (
     <>
       <div className="bg-linear-to-br from-green-600 via-green-500 to-green-400 text-white">
@@ -216,7 +221,7 @@ export default function Profile() {
                       <div className="flex items-center justify-between">
                         <span className="text-gray-500">Role</span>
                         <span className="px-3 py-1 rounded-lg bg-green-100 text-green-700 font-medium capitalize">
-                          user
+                          {myData?.user.role || 'user'}
                         </span>
                       </div>
                     </div>

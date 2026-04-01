@@ -26,7 +26,7 @@ export default async function category(props: { params: Promise<{ id: string }> 
             </Link>
             <div className="mb-6">
               <h2 className="text-lg font-bold text-gray-900">
-                <span>{subcategories?.length}</span> Subcategories in <span>{category?.name}</span>
+                <span>{subcategories?.length}</span> Subcategories in <span>{category?.name || "Category"}</span>
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">

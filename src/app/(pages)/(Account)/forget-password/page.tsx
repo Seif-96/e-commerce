@@ -27,22 +27,20 @@ export default function Login() {
     resolver: zodResolver(forgotPasswordSchema),
   });
   const { handleSubmit } = form;
-async function mySubmit(data: forgotPasswordSchemaType) {
-  setLoading(true);
+  async function mySubmit(data: forgotPasswordSchemaType) {
+    setLoading(true);
+    const response = await forgotPasswords(data);
+    if (response?.ok) {
+      toast.success('Reset code sent to your email!');
+      setTimeout(() => {
+        router.push(`/forget-password/otp?email=${data.email}`);
+      }, 1500);
+    } else {
+      toast.error(response?.data?.message || response?.error);
+    }
 
-  const response = await forgotPasswords(data);
-
-  if (response?.ok) {
-    toast.success('Reset code sent to your email!');
-    setTimeout(() => {
-      router.push('/forget-password/otp');
-    }, 1500);
-  } else {
-    toast.error(response?.data?.message || response?.error);
+    setLoading(false);
   }
-
-  setLoading(false);
-}
   return (
     <>
       <section>

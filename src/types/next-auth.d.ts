@@ -6,11 +6,13 @@ declare module 'next-auth' {
     name: string;
     email: string;
     accessToken: string;
+    role: string;
   }
   interface Session {
     user: {
       name: string;
       email: string;
+      role: string;
     };
     expires: string;
     id: string;
@@ -22,5 +24,6 @@ declare module 'next-auth/jwt' {
     /** OpenID ID Token */
     routeToken: string;
     id: string;
+    role: string;
   }
 }

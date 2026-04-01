@@ -1,11 +1,12 @@
 'use server';
 import {
   forgotPasswordSchemaType,
-  LoginSchemaType,
   OtpSchemaType,
   RegisterSchemaType,
+  ResetPasswordSchemaType,
+  UpdatePasswordSchemaType,
 } from '@/schemas/auth.schema';
-
+// userRegister
 export async function userRegister(data: RegisterSchemaType) {
   try {
     const res = await fetch(`https://ecommerce.routemisr.com/api/v1/auth/signup`, {
@@ -17,24 +18,12 @@ export async function userRegister(data: RegisterSchemaType) {
     return res.ok;
   } catch {}
 }
-
-// export async function forgotPasswords(data: forgotPasswordSchemaType) {
-//   // https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords
-//   try {
-//     const res = await fetch(`https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords`, {
-//       method: 'POST',
-//       body: JSON.stringify(data),
-//       headers: { 'Content-Type': 'application/json' },
-//     });
-//     const result = await res.json();
-//     return res.ok;
-//   } catch {}
-// }
+// forgotPasswords
 export async function forgotPasswords(data: forgotPasswordSchemaType) {
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }, // مهم
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     const result = await res.json();
@@ -50,14 +39,63 @@ export async function forgotPasswords(data: forgotPasswordSchemaType) {
     };
   }
 }
-export async function verifyResetCode(data:OtpSchemaType) {
-console.log(data)
-console.log(typeof data)
+// resetPassword
+export async function resetPassword(data: ResetPasswordSchemaType) {
+  try {
+    const res = await fetch('https://ecommerce.routemisr.com/api/v1/auth/resetPassword', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    return {
+      ok: res.ok,
+      data: result,
+      error: result?.message || null,
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      error: 'Something went wrong',
+    };
+  }
+}
+// verifyResetCode
+export async function verifyResetCode(data: OtpSchemaType) {
+  console.log(data);
+  console.log(typeof data);
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({"resetCode": data.otp}),
+      body: JSON.stringify({ resetCode: data.otp }),
+    });
+    const result = await res.json();
+    return {
+      ok: res.ok,
+      data: result,
+      error: result?.message || null,
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      error: 'Something went wrong',
+    };
+  }
+}
+// changeMyPassword
+export async function changeMyPassword(data: UpdatePasswordSchemaType) {
+  console.log(data);
+  console.log(typeof data);
+  try {
+    const res = await fetch('https://ecommerce.routemisr.com/api/v1/users/changeMyPassword', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        currentPassword: '123456',
+        password: 'pass1234',
+        rePassword: 'pass1234',
+      }),
     });
     const result = await res.json();
     return {

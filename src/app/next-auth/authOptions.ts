@@ -32,6 +32,7 @@ export const authOptions: NextAuthOptions = {
             id: jwt.id,
             name: result.user.name,
             email: result.user.email,
+            role: result.user.role,
             accessToken: result.token,
           };
         } catch (err) {
@@ -41,15 +42,19 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt(param) {
-      if (param.user) {
-        param.token.routeToken = param.user.accessToken;
-        param.token.id = param.user.id;
+    jwt({ token, user }) {
+      if (user) {
+        token.routeToken = user.accessToken;
+        token.id = user.id;
+        token.role = user.role;
       }
-      return param.token;
+      return token;
     },
-    session({ token, session }) {
-      session.id = token.id;
+    session({ session, token }) {
+      if (session.user) {
+        session.id = token.id;
+        session.user.role = token.role;
+      }
       return session;
     },
   },

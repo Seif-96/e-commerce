@@ -1,8 +1,8 @@
-import { AllCategory, Brand, Category, Root2, Subcategory } from '../types/product.type';
+import { AllCategory, Brand, Root2, Subcategory } from '../types/product.type';
 
 export async function getAllProducts(): Promise<Root2[] | undefined> {
   try {
-    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products`);
+    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products`,{ cache: 'no-store' });
     const data = await res.json();
     return data.data;
   } catch (error) {
@@ -66,7 +66,7 @@ export async function getAllsubcategories(): Promise<Subcategory[] | undefined> 
 }
 export async function getSingleSubcategories(id: string): Promise<Root2[]> {
   try {
-    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products?subcategory=${id}`);
+    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products?subcategory=${id}`,{ cache: 'no-store' });
     const data = await res.json();
     return data.data;
   } catch {

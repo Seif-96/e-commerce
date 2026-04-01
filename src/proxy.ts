@@ -9,7 +9,13 @@ export async function proxy(requset: NextRequest) {
     '/checkout',
     '/allorders',
   ];
-  const authRoutes = ['/login', '/register'];
+  const authRoutes = [
+    '/login',
+    '/register',
+    '/forgot-password',
+    '/forgot-password/otp',
+    '/forgot-password/new-password',
+  ];
   const myPath = requset.nextUrl.pathname;
   const myToken = await getToken({
     req: requset,
@@ -35,5 +41,8 @@ export const config = {
     '/allorders/:path*',
     '/login',
     '/register',
+    '/forgot-password',
+    '/forgot-password/otp',
+    '/forgot-password/new-password',
   ],
 };

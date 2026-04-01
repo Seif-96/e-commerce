@@ -170,16 +170,16 @@ export default function Navbar() {
                           <Link href="/categories">All Categories</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/category/6439d58a0049ad0b52b9003f`}>Electronics</Link>
+                          <Link href={`/singleSubcategories/6407f3a8b575d3b90bf957e2`}>Electronics</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/categories/women-fashion`}>{"Women's Fashion"}</Link>
+                          <Link href={`/singleSubcategories/6407f1bcb575d3b90bf95797`}>{"Women's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/categories/man-fashion`}>{"Men's Fashion"}</Link>
+                          <Link href={`/singleSubcategories/6407f243b575d3b90bf957ac`}>{"Men's Fashion"}</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/categories/beauty-health`}>Beauty & Health</Link>
+                          <Link href={`/singleSubcategories/6407f0cbb575d3b90bf95779`}>Beauty & Health</Link>
                         </li>
                       </ul>
                     </NavigationMenuContent>
@@ -234,8 +234,8 @@ export default function Navbar() {
                 <>
                   <DropdownMenu>
                     <DropdownMenuTrigger className="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-green-600 transition-colors cursor-pointer">
-                      <div className="p-2.5 w-10 h-10 rounded-full hover:bg-gray-100 transition-colors group border-0">
-                        <FaRegUserCircle className="text-xltext-gray-500 group-hover:text-green-600 transition-colors" />
+                      <div className="flex items-center justify-center  w-10 h-10 rounded-full hover:bg-gray-100 transition-colors group border-0">
+                        <FaRegUserCircle className="text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
                       </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>

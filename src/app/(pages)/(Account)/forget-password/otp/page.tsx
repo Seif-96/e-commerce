@@ -16,11 +16,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaCheck } from 'react-icons/fa';
 import { toast } from 'sonner';
 import { FaKey } from 'react-icons/fa';
-import { verifyResetCode } from '@/actions/auth.action';
-// import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { forgotPasswords, verifyResetCode } from '@/actions/auth.action';
+import { useSearchParams } from 'next/navigation';
 export default function Login() {
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
   const form = useForm<OtpSchemaType>({
     defaultValues: {
       otp: '',
@@ -28,20 +32,43 @@ export default function Login() {
     resolver: zodResolver(otpSchema),
   });
   const { handleSubmit } = form;
-async function mySubmit(data: OtpSchemaType) {
-  console.log('Submitting OTP:', data);
-  setLoading(true);
-  const response = await verifyResetCode(data);
-  if (response?.ok) {
-    toast.success('Reset code sent to your email!');
-    setTimeout(() => {
-      router.push('/forget-password/new-password');
-    }, 1500);
-  } else {
-    toast.error(response?.data?.message || response?.error);
+  async function mySubmit(data: OtpSchemaType) {
+    console.log('Submitting OTP:', data);
+    setLoading(true);
+    const response = await verifyResetCode(data);
+    if (response?.ok) {
+      toast.success('Reset code sent to your email!');
+      setTimeout(() => {
+        router.push(`/forget-password/new-password?email=${email}`);
+      }, 1500);
+    } else {
+      toast.error(response?.data?.message || response?.error);
+    }
+    setLoading(false);
   }
-  setLoading(false);
-}
+  async function handleResend() {
+    if (!email) return;
+
+    setResendLoading(true);
+
+    const response = await forgotPasswords({ email });
+    if (response?.ok) {
+      toast.success('Code resent successfully');
+      setCooldown(30);
+      const interval = setInterval(() => {
+        setCooldown((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      toast.error(response?.data?.message || response?.error);
+    }
+    setResendLoading(false);
+  }
   return (
     <>
       <section>
@@ -101,7 +128,7 @@ async function mySubmit(data: OtpSchemaType) {
                     </span>
                   </div>
                   <h1 className="text-2xl font-bold text-gray-800 mb-2">Check Your Email</h1>
-                  <p className="text-gray-600">Enter the 6-digit code sent to {/*enter email*/}</p>
+                  <p className="text-gray-600">Enter the 6-digit code sent to {email}</p>
                 </div>
                 <div className="flex items-center justify-center mb-8">
                   <div className="flex items-center">
@@ -149,9 +176,15 @@ async function mySubmit(data: OtpSchemaType) {
                       Didn&apos;t receive the code?{' '}
                       <button
                         type="button"
-                        className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
+                        onClick={handleResend}
+                        disabled={resendLoading || cooldown > 0}
+                        className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 font-medium disabled:opacity-50 transition-colors"
                       >
-                        Resend Code
+                        {resendLoading
+                          ? 'Sending...'
+                          : cooldown > 0
+                            ? `Resend in ${cooldown}s`
+                            : 'Resend Code'}
                       </button>
                     </p>
                   </div>

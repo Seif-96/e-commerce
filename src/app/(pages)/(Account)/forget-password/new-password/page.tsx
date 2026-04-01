@@ -11,39 +11,44 @@ import { SpinnerCustom } from '@/app/_Components/ButtonSpinner/ButtonSpinner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { NewPasswordSchema, NewPasswordSchemaType } from '@/schemas/auth.schema';
+import { ResetPasswordSchema, ResetPasswordSchemaType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FaCheck } from "react-icons/fa6";
-
+import { FaCheck } from 'react-icons/fa6';
 import { toast } from 'sonner';
 import { FaEye } from 'react-icons/fa6';
 import { FaEyeSlash } from 'react-icons/fa';
-import { FaKey } from 'react-icons/fa';
+import { resetPassword } from '@/actions/auth.action';
+import { useSearchParams } from 'next/navigation';
 export default function Login() {
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
   const [showPasswordThere, setShowPasswordThere] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const form = useForm<NewPasswordSchemaType>({
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
+  const form = useForm<ResetPasswordSchemaType>({
     defaultValues: {
+      //add user email from forget password page
+      email: email!,
       newPassword: '',
       rePassword: '',
     },
-    resolver: zodResolver(NewPasswordSchema),
+    resolver: zodResolver(ResetPasswordSchema),
   });
   const { handleSubmit: handlePasswordSubmit, control: passwordControl } = form;
-  async function mySubmit(data: NewPasswordSchemaType) {
-    // const response = await signIn('credentials', { ...data, redirect: false, callbackUrl: '/' });
-    // setLoading(true);
-    // if (response?.ok) {
-    //   toast.success('');
-    //   setTimeout(() => {
-    //     router.push('/login');
-    //   }, 1500);
-    // } else {
-    //   toast.error(response?.error);
-    // }
-    // setLoading(false);
+  async function mySubmit(data: ResetPasswordSchemaType) {
+    setLoading(true);
+    const response = await resetPassword(data);
+    console.log('resssssssssss', response);
+    if (response?.ok) {
+      toast.success('Password reset successfully');
+      setTimeout(() => {
+        router.push('/login');
+      }, 1500);
+    } else {
+      toast.error(response?.error);
+    }
+    setLoading(false);
   }
   return (
     <>

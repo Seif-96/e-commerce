@@ -9,8 +9,6 @@ import { FaShieldAlt } from 'react-icons/fa';
 import MyGallery from './../../../_Components/ProductSlider/ProductSlider';
 import { TabsDemo } from '@/app/_Components/ProductTab/ProdcutTab';
 import ProductSwiper from '@/app/_Components/ProductSliderTwo/ProductSliderTwo';
-import { IoIosArrowBack } from 'react-icons/io';
-import { IoIosArrowForward } from 'react-icons/io';
 export default async function products(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
@@ -18,7 +16,6 @@ export default async function products(props: { params: Promise<{ id: string }> 
     return Math.round(((price - priceAfterDiscount) / price) * 100);
   }
   const singleProduct = await getSingleProduct(id);
-  // جلب المنتجات من نفس subcategory
   const relatedProducts = await getSingleSubcategories(singleProduct.subcategory[0]._id);
   return (
     <>
