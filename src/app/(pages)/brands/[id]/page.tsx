@@ -6,6 +6,7 @@ import { FaFilter } from 'react-icons/fa';
 import Link from 'next/link';
 import React from 'react';
 import NoBroductsFound from '@/app/_Components/NoBroductsFound/NoBroductsFound';
+import PageHeader from '@/app/_Components/PageHeader/PageHeader';
 export default async function page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
@@ -13,6 +14,18 @@ export default async function page(props: { params: Promise<{ id: string }> }) {
   const brandName = singleBrands?.[0]?.brand?.name;
   return (
     <>
+      <PageHeader
+        bgColor={'bg-gradient-to-br from-green-600 via-green-500 to-green-400 text-white'}
+        container={'container mx-auto px-4 py-12 sm:py-16'}
+        flexNav={'flex items-center gap-2 text-sm text-white/70 mb-6 flex-wrap'}
+        linkName={brandName}
+        iconStyle={'text-3xl'}
+        link={'/brands'}
+        nameOfLink={'Brands'}
+        icon={FaTags}
+        h1={brandName}
+        desc={`Shop ${brandName} products`}
+      />
       <section>
         <div className="container mx-auto px-4 py-8">
           <div className="mb-6 flex items-center gap-3 flex-wrap">

@@ -9,6 +9,16 @@ import { FaShieldAlt } from 'react-icons/fa';
 import MyGallery from './../../../_Components/ProductSlider/ProductSlider';
 import { TabsDemo } from '@/app/_Components/ProductTab/ProdcutTab';
 import ProductSwiper from '@/app/_Components/ProductSliderTwo/ProductSliderTwo';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { FaHouse } from 'react-icons/fa6';
+
 export default async function products(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
@@ -19,6 +29,56 @@ export default async function products(props: { params: Promise<{ id: string }> 
   const relatedProducts = await getSingleSubcategories(singleProduct.subcategory[0]._id);
   return (
     <>
+      <nav className="py-4">
+        <div className="container mx-auto px-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              {/* Home */}
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  className="text-gray-500 hover:text-green-600 flex items-center gap-1.5"
+                  href="/"
+                >
+                  <FaHouse /> Home
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbSeparator />
+
+              {/* Category */}
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  className="text-gray-500 hover:text-green-600"
+                  href={`/categories/${singleProduct.category._id}`}
+                >
+                  {singleProduct.category.name}
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              {/* SubCategory */}
+              <BreadcrumbItem>
+                {/* <BreadcrumbLink
+                  className="text-gray-500 hover:text-green-600"
+                  href={`/subcategories/${singleProduct.subcategory[0]?._id}`}
+                >
+                  {singleProduct.subcategory[0]?.name}
+                </BreadcrumbLink> 
+                <BreadcrumbItem> */}
+                <div className="text-gray-500 hover:text-green-600 cursor-pointer">
+                  {singleProduct.subcategory[0]?.name}
+                </div>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              {/* Current Page */}
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-gray-900 font-medium">
+                  {singleProduct.title}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </nav>
       <section className="py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
