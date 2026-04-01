@@ -71,7 +71,7 @@ export default async function products(props: { params: Promise<{ id: string }> 
               <BreadcrumbSeparator />
               {/* Current Page */}
               <BreadcrumbItem>
-                <BreadcrumbPage className="text-gray-900 font-medium">
+                <BreadcrumbPage className="text-gray-900 font-medium truncate max-w-xs">
                   {singleProduct.title}
                 </BreadcrumbPage>
               </BreadcrumbItem>
