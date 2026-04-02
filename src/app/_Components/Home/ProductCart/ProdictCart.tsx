@@ -2,14 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaRegHeart } from 'react-icons/fa';
-import { FaHeart } from "react-icons/fa";
+import { FaHeart } from 'react-icons/fa';
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { FaRegEye } from 'react-icons/fa6';
-import { FaPlus } from 'react-icons/fa6';
 import { Root2 } from '@/api/types/product.type';
 import { renderStars } from '../../StarsRat/StarsRate';
+import ButtonForAddToCart from '../../ButtonForAddToCart/ButtonForAddToCart';
 export default function ProdictCart({ product }: { product: Root2 }) {
-
   function getDiscountPercentage(price: number, priceAfterDiscount: number) {
     return Math.round(((price - priceAfterDiscount) / price) * 100);
   }
@@ -75,9 +74,11 @@ export default function ProdictCart({ product }: { product: Root2 }) {
                 <span className="text-lg font-bold text-gray-800">{product.price} EGP</span>
               )}
             </div>
-            <button className="h-10 w-10 rounded-full flex items-center justify-center transition bg-green-600 text-white hover:bg-green-700 disabled:opacity-70 cursor-pointer">
-              <FaPlus />
-            </button>
+            <ButtonForAddToCart
+              classes="h-10 w-10 rounded-full flex items-center justify-center transition bg-green-600 text-white hover:bg-green-700 disabled:opacity-70 cursor-pointer"
+              icon="plus"
+              id={product.id}
+            />
           </div>
         </div>
       </div>

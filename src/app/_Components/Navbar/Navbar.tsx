@@ -55,7 +55,7 @@ export default function Navbar() {
   }
   return (
     <>
-      <div className="hidden lg:block text-sm border-b border-gray-100">
+      <div className="hidden lg:block text-sm relative bg-white  z-100 border-b border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-10 text-gray-500">
             <div className="flex items-center gap-6">
@@ -127,7 +127,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <header className="sticky top-0 z-40 bg-white shadow-sm">
+      <header className="sticky top-0 z-100 bg-white shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-18 gap-4 lg:gap-8">
             <Link href="/">

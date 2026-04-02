@@ -42,9 +42,7 @@ export default async function products(props: { params: Promise<{ id: string }> 
                   <FaHouse /> Home
                 </BreadcrumbLink>
               </BreadcrumbItem>
-
               <BreadcrumbSeparator />
-
               {/* Category */}
               <BreadcrumbItem>
                 <BreadcrumbLink
@@ -150,7 +148,7 @@ export default async function products(props: { params: Promise<{ id: string }> 
                   maxQty={singleProduct.quantity}
                   price={singleProduct.priceAfterDiscount ?? singleProduct.price}
                 />
-                <AddToCartButtons />
+                <AddToCartButtons id={singleProduct.id} />
                 <div className="border-t border-gray-100 pt-6">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="flex items-center gap-3">

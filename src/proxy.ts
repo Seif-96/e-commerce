@@ -8,6 +8,8 @@ export async function proxy(requset: NextRequest) {
     '/profile/orders',
     '/checkout',
     '/allorders',
+    '/cart',
+    '/wish-list',
   ];
   const authRoutes = [
     '/login',
@@ -39,6 +41,8 @@ export const config = {
     '/profile/orders/:path*',
     '/checkout/:path*',
     '/allorders/:path*',
+    '/cart',
+    '/wish-list',
     '/login',
     '/register',
     '/forgot-password',
