@@ -30,7 +30,7 @@ export default function Cart() {
   const [showModal, setShowModal] = useState(false);
   const [showModalForClearAll, setShowModalForClearAll] = useState(false);
 
-  const maxPrice = 550;
+  const maxPrice = 500;
   const currentPrice = productData?.totalCartPrice || 0;
   const progress = Math.min((currentPrice / maxPrice) * 100, 100);
   const remaining = maxPrice - currentPrice;
@@ -79,7 +79,7 @@ export default function Cart() {
     getProductCart();
   }, []);
 
-  if (!productData || productData.products.length === 0) {
+  if (!productData) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-30">
         <div className="text-center">
@@ -388,7 +388,7 @@ export default function Cart() {
                               <FaTruck className="text-orange-500" />
                               <span className="text-sm font-medium text-gray-700">
                                 Add{' '}
-                                <span className="text-orange-600 font-bold">{remaining} EGP</span>{' '}
+                                <span >{remaining} EGP</span>{' '}
                                 for free shipping
                               </span>
                             </div>
