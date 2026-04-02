@@ -47,7 +47,7 @@ export default function ButtonForAddToWishlist({
         ) : success ? (
           <div className="flex items-center gap-2">
             <FaRegHeart />
-            {icon === 'FaRegHeart' && <span>Added to Cart</span>}
+            {icon === 'FaRegHeart' && <span>Add to Wishlist</span>}
           </div>
         ) : (
           <>
