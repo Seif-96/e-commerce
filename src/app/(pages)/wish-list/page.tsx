@@ -1,12 +1,10 @@
 'use client';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { FaArrowRightLong } from 'react-icons/fa6';
 
 export default function WishList() {
-  const { data: myData, status } = useSession();
   return (
     <>
       <div className="min-h-screen bg-gray-50/50">

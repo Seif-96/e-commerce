@@ -125,9 +125,9 @@ export default function Cart() {
                           {' '}
                           {productData?.products.length}
                           {productData?.products.length > 1 ? (
-                            <span>items</span>
+                            <span> items </span>
                           ) : (
-                            <span>item</span>
+                            <span> item </span>
                           )}
                         </span>
                         in your cart
