@@ -25,14 +25,6 @@ export default function WishList() {
               >
                 Browse Products <FaArrowRightLong />
               </Link>
-              {status === 'unauthenticated' && (
-                <Link
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
-                  href="/login"
-                >
-                  Sign In
-                </Link>
-              )}
             </div>
           </div>
         </div>

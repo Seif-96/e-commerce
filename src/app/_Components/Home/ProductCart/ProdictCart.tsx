@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaRegHeart } from 'react-icons/fa';
-import { FaHeart } from 'react-icons/fa';
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { FaRegEye } from 'react-icons/fa6';
 import { Root2 } from '@/api/types/product.type';
