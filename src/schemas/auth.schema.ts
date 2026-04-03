@@ -84,6 +84,13 @@ export const UpdatePersonalDetailsSchema = zod.object({
     .nonempty('*Please enter your phone number')
     .regex(/^(?:\+20|0)1[0125][0-9]{8}$/, '*Only Egyptian phone numbers are allowed'),
 });
+// Add address
+export const AddAddressSchema = zod.object({
+  name: zod.string().max(20),
+  details: zod.string().max(40),
+  phone: zod.string().max(11),
+  city: zod.string().max(20),
+});
 // NewPasswordSchema
 export const NewPasswordSchema = zod
   .object({
@@ -163,3 +170,4 @@ export type LoginSchemaType = zod.infer<typeof LoginSchema>;
 export type forgotPasswordSchemaType = zod.infer<typeof forgotPasswordSchema>;
 export type NewPasswordSchemaType = zod.infer<typeof NewPasswordSchema>;
 export type ResetPasswordSchemaType = zod.infer<typeof ResetPasswordSchema>;
+export type AddAddressSchemaType = zod.infer<typeof AddAddressSchema>;

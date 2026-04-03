@@ -7,7 +7,6 @@ import { IoIosArrowForward } from 'react-icons/io';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { FaSave } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   UpdatePersonalDetailsSchema,
@@ -23,13 +22,20 @@ import { Field, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { SpinnerCustom } from '@/app/_Components/ButtonSpinner/ButtonSpinner';
 import { Button } from '@/components/ui/button';
+import { updateUserDetails } from '@/actions/updateUserData';
+import { toast } from 'sonner';
+import { changeMyPassword } from '@/actions/auth.action';
 export default function Profile() {
   const [loading, setLoading] = useState(false);
+  const [showMassegPass, setshowMassegPass] = useState(false);
+  const [loadingPass, setLoadingPass] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
   const [showPasswordThere, setShowPasswordThere] = useState(false);
-  const { data: myData, status } = useSession();
-  const router = useRouter();
+  const [showMassegPassError, setshowMassegPassError] = useState(false);
+  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const { data: myData } = useSession();
   const form = useForm<UpdatePersonalDetailsSchemaType>({
     defaultValues: {
       name: '',
@@ -50,11 +56,37 @@ export default function Profile() {
   const { handleSubmit: handlePasswordSubmit, control: passwordControl } = updataPassForm;
   // updateUserDetails
   async function mySubmit(theData: UpdatePersonalDetailsSchemaType) {
-    // updateUserDetails
+    setLoading(true);
+    const res = await updateUserDetails(theData);
+    console.log(res);
+    if (res.ok) {
+      toast('Details Updated');
+      resetProfile();
+      setLoading(false);
+    } else {
+      toast.error(res.data?.errors.msg);
+      setLoading(false);
+    }
   }
   // change the Password
   async function mySubmitTwo(newData: UpdatePasswordSchemaType) {
-    // changeMyPassword
+    setLoadingPass(true);
+    const res = await changeMyPassword(newData);
+    if (res.ok) {
+      setMessage('Password changed successfully');
+      setshowMassegPass(true);
+      setTimeout(() => {
+        setshowMassegPass(false);
+      }, 4000);
+      updataPassForm.reset();
+    } else {
+      setErrorMessage(res.data?.message || res.data?.errors?.msg);
+      setshowMassegPassError(true);
+      setTimeout(() => {
+        setshowMassegPassError(false);
+      }, 4000);
+    }
+    setLoadingPass(false);
   }
   return (
     <>
@@ -137,7 +169,7 @@ export default function Profile() {
                       <div className="flex flex-col gap-2">
                         <Controller
                           name="name"
-                          control={form.control}
+                          control={profileControl}
                           render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
                               <FieldLabel htmlFor="name">Full Name</FieldLabel>
@@ -156,7 +188,7 @@ export default function Profile() {
                       <div className="flex flex-col gap-2">
                         <Controller
                           name="email"
-                          control={form.control}
+                          control={profileControl}
                           render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
                               <FieldLabel htmlFor="email">Email Address</FieldLabel>
@@ -174,7 +206,7 @@ export default function Profile() {
                       <div className="flex flex-col gap-2">
                         <Controller
                           name="phone"
-                          control={form.control}
+                          control={profileControl}
                           render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
                               <FieldLabel htmlFor="phone">Phone Number</FieldLabel>
@@ -238,6 +270,17 @@ export default function Profile() {
                         <p className="text-sm text-gray-500">Update your account password</p>
                       </div>
                     </div>
+                    {/**/}
+                    {showMassegPass && (
+                      <div className="mb-6 p-4 rounded-xl text-sm font-medium bg-green-50 text-green-700 border border-green-200">
+                        {message}
+                      </div>
+                    )}
+                    {showMassegPassError && (
+                      <div className="mb-6 p-4 rounded-xl text-sm font-medium bg-red-50 text-red-700 border border-red-200">
+                        {errorMessage}
+                      </div>
+                    )}
                     <form className="space-y-5" onSubmit={handlePasswordSubmit(mySubmitTwo)}>
                       <div className="relative flex flex-col gap-2">
                         <button
@@ -320,10 +363,10 @@ export default function Profile() {
                       <div className="pt-4">
                         <Button
                           type="submit"
-                          disabled={loading}
+                          disabled={loadingPass}
                           className="inline-flex items-center gap-2 px-6 py-6 rounded-xl bg-amber-600 text-white font-semibold hover:bg-amber-700 transition-colors disabled:opacity-50 shadow-lg shadow-amber-600/25"
                         >
-                          {loading ? (
+                          {loadingPass ? (
                             <>
                               <SpinnerCustom />
                               <span>Changing Password...</span>

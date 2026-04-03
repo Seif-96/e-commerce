@@ -1,16 +1,19 @@
+'use server';
 import { UpdatePersonalDetailsSchemaType } from '@/schemas/auth.schema';
+import { getAccessToken } from '@/utilities';
 
 export async function updateUserDetails(data: UpdatePersonalDetailsSchemaType) {
+  const token = await getAccessToken();
   console.log(data);
   console.log(typeof data);
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/users/updateMe/', {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { token: token as string, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: 'Ahmed Abd Al-Muti',
-        email: 'ahmedmutt2i2@gmail.com',
-        phone: '01010700700',
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
       }),
     });
     const result = await res.json();

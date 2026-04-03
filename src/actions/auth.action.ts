@@ -6,6 +6,7 @@ import {
   ResetPasswordSchemaType,
   UpdatePasswordSchemaType,
 } from '@/schemas/auth.schema';
+import { getAccessToken } from '@/utilities';
 // userRegister
 export async function userRegister(data: RegisterSchemaType) {
   try {
@@ -85,16 +86,17 @@ export async function verifyResetCode(data: OtpSchemaType) {
 }
 // changeMyPassword
 export async function changeMyPassword(data: UpdatePasswordSchemaType) {
+    const token = await getAccessToken();
   console.log(data);
   console.log(typeof data);
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/users/changeMyPassword', {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {  token: token as string, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        currentPassword: '123456',
-        password: 'pass1234',
-        rePassword: 'pass1234',
+        currentPassword:data.password,
+        password: data.newPassword,
+        rePassword:  data.rePassword,
       }),
     });
     const result = await res.json();

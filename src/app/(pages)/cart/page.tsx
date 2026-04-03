@@ -36,8 +36,6 @@ export default function Cart() {
   const remaining = maxPrice - currentPrice;
   async function getProductCart() {
     const res = await getLoggedUserCart();
-    console.log(res);
-    
     if (res.status === 'success') {
       setproductData(res.data);
     }
