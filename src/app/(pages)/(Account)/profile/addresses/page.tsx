@@ -236,8 +236,38 @@ export default function Profile() {
                       </DialogContent>
                     </Dialog>
                   </div>
+                  {/* loading */}
+                  {!addressData && (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Array(2)
+                          .fill(0)
+                          .map((_, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm animate-pulse"
+                            >
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex items-start gap-4 flex-1">
+                                  <div className="w-11 h-11 rounded-xl bg-gray-300 shrink-0"></div>
+                                  <div className="flex-1 min-w-0 space-y-2 py-1">
+                                    <div className="h-4 bg-gray-300 rounded w-3/5"></div>{' '}
+                                    <div className="h-3 bg-gray-200 rounded w-full"></div>{' '}
+                                    <div className="h-3 bg-gray-200 rounded w-2/3"></div>{' '}
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-9 h-9 rounded-lg bg-gray-300"></div>{' '}
+                                  <div className="w-9 h-9 rounded-lg bg-gray-300"></div>{' '}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </>
+                  )}
                   {/* add addresses */}
-                  {addressData?.ok && addressData?.data && addressData.data.length > 0 ? (
+                  {addressData?.ok && addressData?.data && addressData.data.length > 0 && (
                     <>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {addressData.data.map((address) => (
@@ -289,7 +319,9 @@ export default function Profile() {
                         ))}
                       </div>
                     </>
-                  ) : (
+                  )}
+                  {/* No Addresses Yet */}
+                  {addressData?.ok && addressData?.data?.length === 0 && (
                     <>
                       <div className="bg-white rounded-3xl border border-gray-100 p-12 text-center">
                         <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-5">
