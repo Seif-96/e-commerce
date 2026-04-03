@@ -1,7 +1,6 @@
-// استبدل الـ interface القديم بهذا
 export interface AddressData {
   ok: boolean;
-  data: Details[] | null;     // ← غيرها لـ null بدل Details[]
+  data: Details[] | null;
   error: string | null;
 }
 

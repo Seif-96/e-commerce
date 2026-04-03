@@ -29,7 +29,6 @@ export default function Cart() {
   const [productIdLoading, setproductIdLoading] = useState<null | string>(null);
   const [showModal, setShowModal] = useState(false);
   const [showModalForClearAll, setShowModalForClearAll] = useState(false);
-
   const maxPrice = 500;
   const currentPrice = productData?.totalCartPrice || 0;
   const progress = Math.min((currentPrice / maxPrice) * 100, 100);

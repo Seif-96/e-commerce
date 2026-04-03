@@ -20,7 +20,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
-import { addAddresses, getAddresses } from '@/actions/userAddress.action';
+import {
+  addAddresses,
+  getAddresses,
+  RemoveAddress,
+  UpdateSpecificAddress,
+} from '@/actions/userAddress.action';
 import { AddAddressSchemaType, AddAddressSchema } from '@/schemas/auth.schema';
 import { Controller, useForm } from 'react-hook-form';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -32,6 +37,7 @@ import { AddressData } from '@/api/types/address.type';
 
 export default function Profile() {
   const [addressData, setaddressData] = useState<AddressData | null>(null);
+
   const form = useForm<AddAddressSchemaType>({
     defaultValues: {
       name: '',
@@ -41,19 +47,30 @@ export default function Profile() {
     },
     resolver: zodResolver(AddAddressSchema),
   });
-  const { handleSubmit } = form;
+  const { handleSubmit, reset } = form;
   async function mySubmit(data: AddAddressSchemaType) {
     const res = await addAddresses(data);
-    console.log(res);
-    // بعد إضافة عنوان جديد، نرجع نجيب البيانات مرة تانية عشان تتحدث القائمة
     getAddressData();
+    reset();
   }
-
   async function getAddressData() {
     const res = await getAddresses();
     setaddressData(res);
   }
-
+  async function RemoveUserAddress(productId: string) {
+    const res = await RemoveAddress(productId);
+    if (res.status === 'success') {
+      setaddressData(res);
+      getAddressData();
+    }
+  }
+  async function updateAddress(productId: string) {
+    const res = await UpdateSpecificAddress(productId);
+    if (res.status === 'success') {
+      setaddressData(res);
+      getAddressData();
+    }
+  }
   useEffect(() => {
     getAddressData();
   }, []);
@@ -252,14 +269,17 @@ export default function Profile() {
                               </div>
                               <div className="flex items-center gap-2">
                                 <button
-                                  className="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 hover:bg-green-100 hover:text-green-600 flex items-center justify-center transition-colors"
+                                  className="w-9 h-9 rounded-lg bg-gray-100  cursor-pointer text-gray-600 hover:bg-green-100 hover:text-green-600 flex items-center justify-center transition-colors"
                                   title="Edit address"
                                 >
                                   <FaPen className="text-sm" />
                                 </button>
                                 <button
-                                  className="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600 flex items-center justify-center transition-colors disabled:opacity-50"
+                                  className="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 hover:bg-red-100 cursor-pointer hover:text-red-600 flex items-center justify-center transition-colors disabled:opacity-50"
                                   title="Delete address"
+                                  onClick={() => {
+                                    RemoveUserAddress(address._id);
+                                  }}
                                 >
                                   <FaTrash className="text-sm" />
                                 </button>
