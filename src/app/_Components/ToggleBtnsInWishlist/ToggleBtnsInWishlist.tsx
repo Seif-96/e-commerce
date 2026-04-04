@@ -1,16 +1,16 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa';
-import ButtonForAddToWishlist from '../ButtonForAddToWishlist/ButtonForAddToWishlist';
-import {
-  getLoggedUserWishlist,
-  RemoveFromWishlist,
-  AddToWishlist,
-} from '@/actions/addToWishlist.action';
 import { FaRegHeart } from 'react-icons/fa';
+import ButtonForAddToWishlist from '../ButtonForAddToWishlist/ButtonForAddToWishlist';
+import { getLoggedUserWishlist, RemoveFromWishlist } from '@/actions/addToWishlist.action';
+
 const iconsMap = {
   FaRegHeart: FaRegHeart,
   FaHeart: FaHeart,
+};
+type WishlistItem = {
+  id: string;
 };
 export default function ToggleBtnsInWishlist({
   classesOne,
@@ -33,13 +33,14 @@ export default function ToggleBtnsInWishlist({
 }) {
   const [inWishlist, setInWishlist] = useState(false);
   const [loading, setLoading] = useState(false);
-  // جلب حالة المنتج من wishlist على السيرفر
+
+  // ✅ نجيب هل المنتج موجود في wishlist ولا لا
   useEffect(() => {
     async function fetchWishlist() {
       try {
         const res = await getLoggedUserWishlist();
         if (res.status === 'success') {
-          const exists = res.data.some((item: any) => item?.id === id);
+          const exists = res.data.some((item: WishlistItem) => item?.id === id);
           setInWishlist(exists);
         }
       } catch (error) {
@@ -48,21 +49,8 @@ export default function ToggleBtnsInWishlist({
     }
     fetchWishlist();
   }, [id]);
-  // إضافة المنتج للسيرفر
-  const handleAddToWishlist = async () => {
-    setLoading(true);
-    try {
-      const res = await AddToWishlist(id);
-      if (res.status === 'success') {
-        setInWishlist(true);
-      }
-    } catch (error) {
-      console.error('Failed to add to wishlist:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  // حذف المنتج من السيرفر
+
+  // ✅ حذف المنتج
   const handleRemoveFromWishlist = async () => {
     setLoading(true);
     try {
@@ -85,14 +73,13 @@ export default function ToggleBtnsInWishlist({
           {wordTwo && <span>{wordTwo}</span>}
         </button>
       ) : (
-        <div className="flex-1 w-full" onClick={handleAddToWishlist}>
-          <ButtonForAddToWishlist
-            classes={classesOne || ''}
-            word={word || ''}
-            icon="FaRegHeart"
-            id={id}
-          />
-        </div>
+        <ButtonForAddToWishlist
+          classes={classesOne || ''}
+          word={word || ''}
+          icon="FaRegHeart"
+          id={id}
+          onSuccess={() => setInWishlist(true)} // 🔥 التحديث الفوري
+        />
       )}
     </>
   );
