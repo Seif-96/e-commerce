@@ -7,6 +7,7 @@ import { FaRegEye } from 'react-icons/fa6';
 import { Root2 } from '@/api/types/product.type';
 import { renderStars } from '../../StarsRat/StarsRate';
 import ButtonForAddToCart from '../../ButtonForAddToCart/ButtonForAddToCart';
+import ToggleBtnsInWishlist from '../../ToggleBtnsInWishlist/ToggleBtnsInWishlist';
 export default function ProdictCart({ product }: { product: Root2 }) {
   function getDiscountPercentage(price: number, priceAfterDiscount: number) {
     return Math.round(((price - priceAfterDiscount) / price) * 100);
@@ -29,9 +30,12 @@ export default function ProdictCart({ product }: { product: Root2 }) {
           </div>
         )}
         <div className="absolute top-3 right-3 flex flex-col space-y-2">
-          <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-gray-600 hover:text-red-500">
-            <FaRegHeart />
-          </button>
+          <ToggleBtnsInWishlist
+            classesOne="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-gray-600 hover:text-red-500"
+            classesTwo="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-red-600 hover:text-red-500"
+            id={product.id}
+            icon="FaRegHeart"
+          />
           <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 cursor-pointer shadow-sm">
             <FaArrowsRotate />
           </button>
