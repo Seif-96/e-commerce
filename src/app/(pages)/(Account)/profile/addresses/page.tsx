@@ -71,6 +71,12 @@ export default function Profile() {
       getAddressData();
     }
   }
+  const handleDelete = async (id: string) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this address?");
+  if (!confirmDelete) return;
+
+  await RemoveUserAddress(id);
+};
   useEffect(() => {
     getAddressData();
   }, []);
@@ -308,7 +314,7 @@ export default function Profile() {
                                   className="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 hover:bg-red-100 cursor-pointer hover:text-red-600 flex items-center justify-center transition-colors disabled:opacity-50"
                                   title="Delete address"
                                   onClick={() => {
-                                    RemoveUserAddress(address._id);
+                                    handleDelete(address._id);
                                   }}
                                 >
                                   <FaTrash className="text-sm" />

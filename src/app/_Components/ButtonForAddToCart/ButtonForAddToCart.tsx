@@ -13,11 +13,15 @@ const iconsMap = {
 export default function ButtonForAddToCart({
   classes,
   word,
+  wordStyle,
+  iconStyle,
   icon,
   id,
 }: {
   classes: string;
   word?: string;
+  wordStyle?: string;
+  iconStyle?: string;
   icon?: keyof typeof iconsMap;
   id: string;
 }) {
@@ -43,7 +47,10 @@ export default function ButtonForAddToCart({
         className={classes}
       >
         {updateLoading ? (
+          <>
           <RiLoader2Fill className="animate-spin" />
+          {wordStyle && <span className={wordStyle}>Adding to Cart..</span>}
+          </>
         ) : success ? (
           <div className="flex items-center gap-2">
             <IoMdCheckmark />
@@ -51,8 +58,8 @@ export default function ButtonForAddToCart({
           </div>
         ) : (
           <>
-            {Icon && <Icon />}
-            {word}
+            {Icon && <Icon  className={iconStyle}/>}
+            {word && <span className={wordStyle}>{word}</span>}
           </>
         )}
       </Button>

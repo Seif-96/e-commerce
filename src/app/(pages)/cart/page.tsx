@@ -361,9 +361,9 @@ export default function Cart() {
                         <p className="text-green-100 text-sm mt-1">
                           {productData?.products.length}
                           {productData?.products.length > 1 ? (
-                            <span>items</span>
+                            <span> items </span>
                           ) : (
-                            <span>item</span>
+                            <span> item </span>
                           )}
                           in your carts
                         </p>
