@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Exo } from 'next/font/google';
+import { Exo } from 'next/font/google';
 import './globals.css';
 import Navbar from './_Components/Navbar/Navbar';
 import Footer from './_Components/Footer/Footer';
 import { Toaster } from '@/components/ui/sonner';
 import MyProvider from './_Components/MyProvider/MyProvider';
+import CartContextProvider from '../context/CartContext';
+import WishlistContextProvider from '../context/WishListContext';
 const exo = Exo({
   variable: '--font-exo',
   subsets: ['latin'],
@@ -23,18 +25,22 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${exo.className} antialiased`}>
         <MyProvider>
-          <Navbar />
-          <Toaster
-            position="top-right"
-            richColors
-            toastOptions={{
-              duration: 4000,
-              className: 'custom-toast',
-            }}
-          />
-          {children}
-          <Footer />
-        </MyProvider>ِ
+          <CartContextProvider>
+            <WishlistContextProvider>
+              <Navbar />
+              <Toaster
+                position="top-right"
+                richColors
+                toastOptions={{
+                  duration: 2500,
+                  className: 'custom-toast',
+                }}
+              />
+              {children}
+              <Footer />
+            </WishlistContextProvider>
+          </CartContextProvider>
+        </MyProvider>
       </body>
     </html>
   );

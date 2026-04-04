@@ -1,9 +1,10 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import ButtonForAddToWishlist from '../ButtonForAddToWishlist/ButtonForAddToWishlist';
 import { getLoggedUserWishlist, RemoveFromWishlist } from '@/actions/addToWishlist.action';
+import { WishlistContext } from '@/context/WishListContext';
 
 const iconsMap = {
   FaRegHeart: FaRegHeart,
@@ -31,6 +32,7 @@ export default function ToggleBtnsInWishlist({
   icon?: keyof typeof iconsMap;
   id: string;
 }) {
+  const { numOfWishlistItems, setnumOfWishlistItems } = useContext(WishlistContext);
   const [inWishlist, setInWishlist] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -57,6 +59,7 @@ export default function ToggleBtnsInWishlist({
       const res = await RemoveFromWishlist(id);
       if (res.status === 'success') {
         setInWishlist(false);
+              setnumOfWishlistItems(numOfWishlistItems - 1);
       }
     } catch (error) {
       console.error('Failed to remove from wishlist:', error);

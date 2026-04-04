@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaBoxOpen, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { FaArrowRightLong, FaTrash } from 'react-icons/fa6';
@@ -21,8 +21,11 @@ import { FaLock } from 'react-icons/fa';
 import { FaTruck } from 'react-icons/fa';
 import { FaTag } from 'react-icons/fa6';
 import { FaShieldAlt } from 'react-icons/fa';
+import { CartContext } from '@/context/CartContext';
 
 export default function Cart() {
+  const { numOfCartItems, setnumOfCartItems } = useContext(CartContext);
+
   const [productData, setproductData] = useState<null | cartData>(null);
   const [disabledUpdate, setdisabledUpdate] = useState(false);
   const [updateLoading, setupdateLoading] = useState(false);
@@ -33,25 +36,26 @@ export default function Cart() {
   const currentPrice = productData?.totalCartPrice || 0;
   const progress = Math.min((currentPrice / maxPrice) * 100, 100);
   const remaining = maxPrice - currentPrice;
+
   async function getProductCart() {
     const res = await getLoggedUserCart();
     if (res.status === 'success') {
       setproductData(res.data);
     }
   }
-  async function clearCart() {
-    const res = await RemoveAllProductsFromCart();
-    if (res.status === 'success') {
-      setproductData(res.data);
-    }
-  }
-  async function updateProduct(productId: string, count: number) {
+  async function updateProduct(productId: string, count: number, sign: string) {
     setproductIdLoading(productId);
     setdisabledUpdate(true);
     setupdateLoading(true);
     const res = await UpdateProductQuantity(productId, count);
     if (res.status === 'success') {
       setproductData(res.data);
+
+      if (sign === '+') {
+        setnumOfCartItems(numOfCartItems + 1);
+      } else {
+        setnumOfCartItems(numOfCartItems - 1);
+      }
       setdisabledUpdate(false);
       setupdateLoading(false);
     } else {
@@ -59,7 +63,7 @@ export default function Cart() {
       setupdateLoading(false);
     }
   }
-  async function RemoveProductFromCart(productId: string) {
+  async function RemoveProductFromCart(productId: string, count: number) {
     setupdateLoading(true);
     setproductIdLoading(productId);
     const res = await RemoveProduct(productId);
@@ -67,10 +71,18 @@ export default function Cart() {
       setproductData(res.data);
       if (res.status === 'success') {
         setproductData(res.data);
+        setnumOfCartItems(numOfCartItems - count);
         setupdateLoading(false);
       } else {
         setupdateLoading(false);
       }
+    }
+  }
+  async function clearCart() {
+    const res = await RemoveAllProductsFromCart();
+    if (res.status === 'success') {
+      setproductData(res.data);
+      setnumOfCartItems(0);
     }
   }
   useEffect(() => {
@@ -136,7 +148,7 @@ export default function Cart() {
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
-                    {/*  */}
+                    {/* productData?.products.map */}
                     {productData?.products.map((product) => (
                       <div key={product.product.id} className="space-y-4 mt-4">
                         <div className="relative bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 ">
@@ -206,7 +218,7 @@ export default function Cart() {
                                       <Button
                                         disabled={disabledUpdate || product.count <= 1}
                                         onClick={() =>
-                                          updateProduct(product.product.id, product.count - 1)
+                                          updateProduct(product.product.id, product.count - 1, '-')
                                         }
                                         className="h-8 w-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none transition-all"
                                         aria-label="Decrease quantity"
@@ -219,7 +231,7 @@ export default function Cart() {
                                       <Button
                                         disabled={disabledUpdate}
                                         onClick={() =>
-                                          updateProduct(product.product.id, product.count + 1)
+                                          updateProduct(product.product.id, product.count + 1, '+')
                                         }
                                         className="h-8 w-8 rounded-lg bg-green-600 shadow-sm shadow-green-600/30 flex items-center justify-center text-white hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                                         aria-label="Increase quantity"
@@ -278,7 +290,10 @@ export default function Cart() {
                                             </button>
                                             <button
                                               onClick={() => {
-                                                RemoveProductFromCart(product.product.id);
+                                                RemoveProductFromCart(
+                                                  product.product.id,
+                                                  product.count,
+                                                );
                                                 setShowModal(false);
                                               }}
                                               className="px-4 cursor-pointer py-2 rounded-lg bg-red-500 text-white hover:bg-red-600"
@@ -386,9 +401,7 @@ export default function Cart() {
                             <div className="flex items-center gap-2 mb-2">
                               <FaTruck className="text-orange-500" />
                               <span className="text-sm font-medium text-gray-700">
-                                Add{' '}
-                                <span >{remaining} EGP</span>{' '}
-                                for free shipping
+                                Add <span>{remaining} EGP</span> for free shipping
                               </span>
                             </div>
                             {/* Progress Bar */}

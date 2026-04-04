@@ -1,5 +1,5 @@
 'use client';
-import * as React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../assets/images/freshcart-logo.svg';
 import { FaTruck } from 'react-icons/fa';
 import { IoIosGift } from 'react-icons/io';
@@ -47,8 +47,12 @@ import {
 } from '@/components/ui/sheet';
 import { signOut, useSession } from 'next-auth/react';
 import { FaRegUserCircle } from 'react-icons/fa';
+import { CartContext } from '@/context/CartContext';
+import { WishlistContext } from '@/context/WishListContext';
 
 export default function Navbar() {
+  const { numOfCartItems, setnumOfCartItems } = useContext(CartContext);
+  const { numOfWishlistItems, setnumOfWishlistItems } = useContext(WishlistContext);
   const { data: myData, status } = useSession();
   function mySignOut() {
     signOut({ redirect: true, callbackUrl: '/login' });
@@ -170,16 +174,24 @@ export default function Navbar() {
                           <Link href="/categories">All Categories</Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/singleSubcategories/6407f3a8b575d3b90bf957e2`}>Electronics</Link>
+                          <Link href={`/singleSubcategories/6407f3a8b575d3b90bf957e2`}>
+                            Electronics
+                          </Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/singleSubcategories/6407f1bcb575d3b90bf95797`}>{"Women's Fashion"}</Link>
+                          <Link href={`/singleSubcategories/6407f1bcb575d3b90bf95797`}>
+                            {"Women's Fashion"}
+                          </Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/singleSubcategories/6407f243b575d3b90bf957ac`}>{"Men's Fashion"}</Link>
+                          <Link href={`/singleSubcategories/6407f243b575d3b90bf957ac`}>
+                            {"Men's Fashion"}
+                          </Link>
                         </li>
                         <li className="px-4 py-2.5 text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">
-                          <Link href={`/singleSubcategories/6407f0cbb575d3b90bf95779`}>Beauty & Health</Link>
+                          <Link href={`/singleSubcategories/6407f0cbb575d3b90bf95779`}>
+                            Beauty & Health
+                          </Link>
                         </li>
                       </ul>
                     </NavigationMenuContent>
@@ -213,12 +225,22 @@ export default function Navbar() {
                 className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
               >
                 <FaRegHeart className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
+                {numOfWishlistItems !== 0 && (
+                  <span className="absolute top-0.5 right-0.5 size-4.5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
+                    {numOfWishlistItems}
+                  </span>
+                )}
               </Link>
               <Link
                 href="/cart"
                 className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
               >
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
+                {numOfCartItems !== 0 && (
+                  <span className="absolute top-0.5 right-0.5 size-4.5 rounded-full bg-green-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
+                    {numOfCartItems}
+                  </span>
+                )}
               </Link>
               {status === 'unauthenticated' ? (
                 <>

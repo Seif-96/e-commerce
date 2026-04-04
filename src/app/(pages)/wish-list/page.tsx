@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
 import { FaArrowRightLong } from 'react-icons/fa6';
@@ -10,8 +10,10 @@ import { FaCheck } from 'react-icons/fa6';
 import ButtonForAddToCart from '@/app/_Components/ButtonForAddToCart/ButtonForAddToCart';
 import { getLoggedUserWishlist, RemoveFromWishlist } from '@/actions/addToWishlist.action';
 import { ForWishlist } from '@/api/types/wishlist.type';
+import { WishlistContext } from '@/context/WishListContext';
 
 export default function WishList() {
+  const { numOfWishlistItems, setnumOfWishlistItems } = useContext(WishlistContext);
   const [productData, setproductData] = useState<null | ForWishlist>(null);
   const [updateLoading, setupdateLoading] = useState(false);
   const [addedToCart, setAddedToCart] = useState<string[]>([]);
@@ -22,11 +24,12 @@ export default function WishList() {
       setproductData(res);
     }
   }
-  async function RemoveProductFromCart(productId: string) {
+  async function RemoveProductFromCart(productId: string, count: number) {
     setupdateLoading(true);
     const res = await RemoveFromWishlist(productId);
     if (res.status === 'success') {
       setproductData(res);
+      setnumOfWishlistItems(numOfWishlistItems - count);
     }
     setupdateLoading(false);
   }
@@ -168,7 +171,7 @@ export default function WishList() {
                       <button
                         disabled={updateLoading}
                         onClick={() => {
-                          RemoveProductFromCart(product.id);
+                          RemoveProductFromCart(product.id, 1);
                         }}
                         className="w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all disabled:opacity-50 cursor-pointer"
                         title="Remove"

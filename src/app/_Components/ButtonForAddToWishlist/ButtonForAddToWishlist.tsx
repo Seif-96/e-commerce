@@ -1,12 +1,14 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaCartShopping, FaPlus } from 'react-icons/fa6';
 import { RiLoader2Fill } from 'react-icons/ri';
 import { IoMdCheckmark } from 'react-icons/io';
 import { FaHeart } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import { AddToWishlist } from '@/actions/addToWishlist.action';
+import { WishlistContext } from '@/context/WishListContext';
+import { toast } from 'sonner';
 const iconsMap = {
   FaRegHeart: FaRegHeart,
   FaHeart: FaHeart,
@@ -28,20 +30,29 @@ export default function ButtonForAddToWishlist({
   id: string;
   onSuccess?: () => void;
 }) {
+  const { numOfWishlistItems, setnumOfWishlistItems } = useContext(WishlistContext);
+
   const Icon = icon ? iconsMap[icon] : null;
   const [updateLoading, setupdateLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   async function AddProduct() {
     setupdateLoading(true);
-    const res = await AddToWishlist(id);
-    setupdateLoading(false);
-    if (res.status === 'success') {
-      setSuccess(true);
-      onSuccess?.();
+    try {
+      const res = await AddToWishlist(id);
+      setupdateLoading(false);
+      if (res.status === 'success') {
+        setSuccess(true);
+        setnumOfWishlistItems(numOfWishlistItems + 1);
+        onSuccess?.();
+      } else {
+        setnumOfWishlistItems(numOfWishlistItems - 1);
+      }
+      setTimeout(() => {
+        setSuccess(false);
+      }, 1000);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'An error occurred');
     }
-    setTimeout(() => {
-      setSuccess(false);
-    }, 1000);
   }
 
   return (
