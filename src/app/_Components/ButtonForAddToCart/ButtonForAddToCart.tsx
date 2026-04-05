@@ -47,6 +47,7 @@ export default function ButtonForAddToCart({
       }, 1000);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'An error occurred');
+      setupdateLoading(false);
     }
   }
   return (

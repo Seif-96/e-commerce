@@ -39,20 +39,25 @@ export default function ButtonForAddToWishlist({
     setupdateLoading(true);
     try {
       const res = await AddToWishlist(id);
-      setupdateLoading(false);
+      console.log('RES:', res);
+
       if (res.status === 'success') {
         setSuccess(true);
         setnumOfWishlistItems(numOfWishlistItems + 1);
         onSuccess?.();
       } else {
-        setnumOfWishlistItems(numOfWishlistItems - 1);
+        console.log('FAILED RESPONSE');
       }
-      setTimeout(() => {
-        setSuccess(false);
-      }, 1000);
     } catch (error) {
+      console.error('ERROR:', error);
       toast.error(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setupdateLoading(false);
     }
+
+    setTimeout(() => {
+      setSuccess(false);
+    }, 1000);
   }
 
   return (
