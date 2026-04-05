@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,8 +23,10 @@ export default function WishList() {
     const res = await getLoggedUserWishlist();
     if (res.status === 'success') {
       setproductData(res);
+      setnumOfWishlistItems(numOfWishlistItems);
     }
   }
+  
   async function RemoveProductFromCart(productId: string, count: number) {
     setupdateLoading(true);
     const res = await RemoveFromWishlist(productId);
@@ -34,7 +37,6 @@ export default function WishList() {
     setupdateLoading(false);
   }
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     getProductCart();
   }, []);
   if (!productData) {

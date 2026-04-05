@@ -8,7 +8,6 @@ export default function WishlistContextProvider({ children }) {
   async function getProductWishlist() {
     try {
       const res = await getLoggedUserWishlist();
-      console.log('contextWishlist', res.data.products);
       let sum = 0;
       res.data.products.forEach((product) => {
         sum += product.count;

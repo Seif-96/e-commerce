@@ -1,8 +1,5 @@
 'use server';
 import { getAccessToken } from '@/utilities';
-// add    https://ecommerce.routemisr.com/api/v1/wishlist
-// remove  https://ecommerce.routemisr.com/api/v1/wishlist/61e81f641904360ec15c6db1
-// get   https://ecommerce.routemisr.com/api/v1/wishlist
 export async function AddToWishlist(productId: string) {
   const token = await getAccessToken();
   if (!token) {

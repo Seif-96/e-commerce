@@ -36,7 +36,6 @@ export default function ToggleBtnsInWishlist({
   const [inWishlist, setInWishlist] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // ✅ نجيب هل المنتج موجود في wishlist ولا لا
   useEffect(() => {
     async function fetchWishlist() {
       try {
@@ -52,7 +51,6 @@ export default function ToggleBtnsInWishlist({
     fetchWishlist();
   }, [id]);
 
-  // ✅ حذف المنتج
   const handleRemoveFromWishlist = async () => {
     setLoading(true);
     try {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
@@ -15,7 +16,6 @@ export default function CartContextProvider({ children }) {
   async function getProductCart() {
     try {
       const res = await getLoggedUserCart();
-      console.log('contextCart', res.data.products);
       let sum = 0;
       res.data.products.forEach((product) => {
         sum += product.count;
@@ -26,7 +26,6 @@ export default function CartContextProvider({ children }) {
     }
   }
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     getProductCart();
   }, []);
   return (
