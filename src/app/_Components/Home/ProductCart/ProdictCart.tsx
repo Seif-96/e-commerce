@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaRegHeart } from 'react-icons/fa';
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { FaRegEye } from 'react-icons/fa6';
 import { Root2 } from '@/api/types/product.type';
@@ -34,7 +33,6 @@ export default function ProdictCart({ product }: { product: Root2 }) {
             classesOne="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-gray-600 hover:text-red-500"
             classesTwo="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer text-red-600 hover:text-red-500"
             id={product.id}
-            icon="FaRegHeart"
           />
           <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 cursor-pointer shadow-sm">
             <FaArrowsRotate />

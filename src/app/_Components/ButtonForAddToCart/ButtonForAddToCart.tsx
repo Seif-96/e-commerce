@@ -12,6 +12,7 @@ const iconsMap = {
   cart: FaCartShopping,
   plus: FaPlus,
 };
+
 export default function ButtonForAddToCart({
   classes,
   word,
@@ -31,50 +32,47 @@ export default function ButtonForAddToCart({
   const Icon = icon ? iconsMap[icon] : null;
   const [updateLoading, setupdateLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
   async function AddProduct() {
     setupdateLoading(true);
+
     try {
       const res = await AddToCart(id);
+
       if (res.status === 'success') {
-        setnumOfCartItems(numOfCartItems + 1);
+        setnumOfCartItems((prev: number) => prev + 1);
       } else {
-        setnumOfCartItems(numOfCartItems - 1);
+        setnumOfCartItems((prev: number) => Math.max(prev - 1, 0));
       }
-      setupdateLoading(false);
+
       setSuccess(true);
-      setTimeout(() => {
-        setSuccess(false);
-      }, 1000);
+      setupdateLoading(false);
+
+      setTimeout(() => setSuccess(false), 1000);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'An error occurred');
       setupdateLoading(false);
     }
   }
+
   return (
-    <>
-      <Button
-        onClick={() => {
-          AddProduct();
-        }}
-        className={classes}
-      >
-        {updateLoading ? (
-          <>
-            <RiLoader2Fill className="animate-spin" />
-            {wordStyle && <span className={wordStyle}>Adding to Cart..</span>}
-          </>
-        ) : success ? (
-          <div className="flex items-center gap-2">
-            <IoMdCheckmark />
-            {icon === 'cart' && <span>Added to Cart</span>}
-          </div>
-        ) : (
-          <>
-            {Icon && <Icon className={iconStyle} />}
-            {word && <span className={wordStyle}>{word}</span>}
-          </>
-        )}
-      </Button>
-    </>
+    <Button onClick={AddProduct} className={classes}>
+      {updateLoading ? (
+        <>
+          <RiLoader2Fill className="animate-spin" />
+          {wordStyle && <span className={wordStyle}>Adding to Cart..</span>}
+        </>
+      ) : success ? (
+        <div className="flex items-center gap-2">
+          <IoMdCheckmark />
+          {icon === 'cart' && <span>Added to Cart</span>}
+        </div>
+      ) : (
+        <>
+          {Icon && <Icon className={iconStyle} />}
+          {word && <span className={wordStyle}>{word}</span>}
+        </>
+      )}
+    </Button>
   );
 }

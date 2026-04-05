@@ -1,18 +1,11 @@
+// ToggleBtnsInWishlist.tsx
 'use client';
 import React, { useState, useEffect, useContext } from 'react';
-import { FaHeart } from 'react-icons/fa';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import ButtonForAddToWishlist from '../ButtonForAddToWishlist/ButtonForAddToWishlist';
 import { getLoggedUserWishlist, RemoveFromWishlist } from '@/actions/addToWishlist.action';
 import { WishlistContext } from '@/context/WishListContext';
 
-const iconsMap = {
-  FaRegHeart: FaRegHeart,
-  FaHeart: FaHeart,
-};
-type WishlistItem = {
-  id: string;
-};
 export default function ToggleBtnsInWishlist({
   classesOne,
   classesTwo,
@@ -35,8 +28,7 @@ export default function ToggleBtnsInWishlist({
       try {
         const res = await getLoggedUserWishlist();
         if (res.status === 'success') {
-          const exists = res.data.some((item: WishlistItem) => item?.id === id);
-          setInWishlist(exists);
+          setInWishlist(res.data.some((item: { id: string }) => item.id === id));
         }
       } catch (error) {
         console.error('Failed to fetch wishlist:', error);
@@ -51,7 +43,7 @@ export default function ToggleBtnsInWishlist({
       const res = await RemoveFromWishlist(id);
       if (res.status === 'success') {
         setInWishlist(false);
-        setnumOfWishlistItems(numOfWishlistItems - 1);
+        setnumOfWishlistItems((prev: number) => Math.max(prev - 1, 0));
       }
     } catch (error) {
       console.error('Failed to remove from wishlist:', error);
