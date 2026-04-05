@@ -4,8 +4,6 @@ import { getAccessToken } from '@/utilities';
 
 export async function updateUserDetails(data: UpdatePersonalDetailsSchemaType) {
   const token = await getAccessToken();
-  console.log(data);
-  console.log(typeof data);
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/users/updateMe/', {
       method: 'PUT',

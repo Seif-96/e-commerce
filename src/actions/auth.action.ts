@@ -63,8 +63,6 @@ export async function resetPassword(data: ResetPasswordSchemaType) {
 }
 // verifyResetCode
 export async function verifyResetCode(data: OtpSchemaType) {
-  console.log(data);
-  console.log(typeof data);
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode', {
       method: 'POST',
@@ -87,8 +85,6 @@ export async function verifyResetCode(data: OtpSchemaType) {
 // changeMyPassword
 export async function changeMyPassword(data: UpdatePasswordSchemaType) {
     const token = await getAccessToken();
-  console.log(data);
-  console.log(typeof data);
   try {
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/users/changeMyPassword', {
       method: 'PUT',
