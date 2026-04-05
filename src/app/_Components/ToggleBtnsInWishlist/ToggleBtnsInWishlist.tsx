@@ -18,18 +18,12 @@ export default function ToggleBtnsInWishlist({
   classesTwo,
   word,
   wordTwo,
-  wordStyle,
-  iconStyle,
-  icon,
   id,
 }: {
   classesOne?: string;
   classesTwo?: string;
   word?: string;
   wordTwo?: string;
-  wordStyle?: string;
-  iconStyle?: string;
-  icon?: keyof typeof iconsMap;
   id: string;
 }) {
   const { numOfWishlistItems, setnumOfWishlistItems } = useContext(WishlistContext);
@@ -57,7 +51,7 @@ export default function ToggleBtnsInWishlist({
       const res = await RemoveFromWishlist(id);
       if (res.status === 'success') {
         setInWishlist(false);
-              setnumOfWishlistItems(numOfWishlistItems - 1);
+        setnumOfWishlistItems(numOfWishlistItems - 1);
       }
     } catch (error) {
       console.error('Failed to remove from wishlist:', error);
@@ -79,7 +73,7 @@ export default function ToggleBtnsInWishlist({
           word={word || ''}
           icon="FaRegHeart"
           id={id}
-          onSuccess={() => setInWishlist(true)} // 🔥 التحديث الفوري
+          onSuccess={() => setInWishlist(true)}
         />
       )}
     </>

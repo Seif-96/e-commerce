@@ -36,11 +36,13 @@ export default function Cart() {
   const currentPrice = productData?.totalCartPrice || 0;
   const progress = Math.min((currentPrice / maxPrice) * 100, 100);
   const remaining = maxPrice - currentPrice;
+  const [cartId, setcartId] = useState('');
 
   async function getProductCart() {
     const res = await getLoggedUserCart();
     if (res.status === 'success') {
       setproductData(res.data);
+      setcartId(res.cartId);
     }
   }
   async function updateProduct(productId: string, count: number, sign: string) {
@@ -459,7 +461,7 @@ export default function Cart() {
                         </button>
                         <Link
                           className="w-full bg-linear-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all flex items-center justify-center gap-3 shadow-lg shadow-green-600/20 active:scale-[0.98]"
-                          href="#"
+                          href={`/cart/checkout/${cartId}`}
                         >
                           <FaLock />
                           <span>Secure Checkout</span>

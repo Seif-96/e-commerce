@@ -2,11 +2,26 @@ import { decode } from 'next-auth/jwt';
 import { cookies } from 'next/headers';
 
 export async function getAccessToken() {
-  const cooke = await cookies();
-  const tokenDev = cooke.get('next-auth.session-token')?.value;
-  const tokenProd = cooke.get('__Secure-next-auth.session-token')?.value;
+  const cookieStore = await cookies();
+
+  const tokenDev = cookieStore.get('next-auth.session-token')?.value;
+  const tokenProd = cookieStore.get('__Secure-next-auth.session-token')?.value;
+
   const myToken = tokenDev || tokenProd;
-  const decodedToken = await decode({ token: myToken, secret: process.env.NEXTAUTH_SECRET! });
-  const token = decodedToken?.routeToken;
-  return token;
+
+  // ✅ حماية من الكراش
+  if (!myToken) {
+    console.log('❌ No session token found');
+    return null;
+  }
+  try {
+    const decodedToken = await decode({
+      token: myToken,
+      secret: process.env.NEXTAUTH_SECRET!,
+    });
+    return decodedToken?.routeToken || null;
+  } catch (err) {
+    console.error('❌ Decode failed:', err);
+    return null;
+  }
 }

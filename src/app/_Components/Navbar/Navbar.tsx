@@ -287,7 +287,7 @@ export default function Navbar() {
                         <DropdownMenuItem>
                           <Link
                             className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors"
-                            href="/orders"
+                            href="/allorders"
                           >
                             <FaBoxOpen className="w-4 text-gray-400" />
                             My Orders

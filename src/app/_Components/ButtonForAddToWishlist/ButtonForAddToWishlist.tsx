@@ -31,7 +31,6 @@ export default function ButtonForAddToWishlist({
   onSuccess?: () => void;
 }) {
   const { numOfWishlistItems, setnumOfWishlistItems } = useContext(WishlistContext);
-
   const Icon = icon ? iconsMap[icon] : null;
   const [updateLoading, setupdateLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -39,8 +38,6 @@ export default function ButtonForAddToWishlist({
     setupdateLoading(true);
     try {
       const res = await AddToWishlist(id);
-      console.log('RES:', res);
-
       if (res.status === 'success') {
         setSuccess(true);
         setnumOfWishlistItems(numOfWishlistItems + 1);
@@ -54,7 +51,6 @@ export default function ButtonForAddToWishlist({
     } finally {
       setupdateLoading(false);
     }
-
     setTimeout(() => {
       setSuccess(false);
     }, 1000);
