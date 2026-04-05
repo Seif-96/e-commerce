@@ -4,14 +4,14 @@ import { cookies } from 'next/headers';
 export async function getAccessToken() {
   const cooke = cookies();
 
-  const tokenDev = cooke.get('next-auth.session-token')?.value;
-  const tokenProd = cooke.get('__Secure-next-auth.session-token')?.value;
+  const tokenDev = (await cooke).get('next-auth.session-token')?.value;
+  const tokenProd = (await cooke).get('__Secure-next-auth.session-token')?.value;
 
   const myToken = tokenDev || tokenProd;
 
   // 🔥 أهم سطر
   if (!myToken) {
-    console.log('❌ No session token found');
+    console.log('Login First');
     return null;
   }
 
