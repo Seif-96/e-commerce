@@ -1,17 +1,16 @@
-"use client";
+'use client';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
-
 export default function Loading() {
-   const pathname = usePathname();
-  if (pathname === "/login") return null;
-  if (pathname === "/register") return null;
-  if (pathname === "/contact") return null;
-  if (pathname === "/wish-list") return null;
-  if (pathname === "/cart") return null;
-  if (pathname === "/profile/addresses") return null;
-  if (pathname === "/profile/settings") return null;
+  const pathname = usePathname();
+  if (pathname === '/login') return null;
+  if (pathname === '/register') return null;
+  if (pathname === '/contact') return null;
+  if (pathname === '/wish-list') return null;
+  if (pathname === '/cart') return null;
+  if (pathname === '/profile/addresses') return null;
+  if (pathname === '/profile/settings') return null;
   return (
     <>
       {/* Slider Skeleton */}

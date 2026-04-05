@@ -8,10 +8,8 @@ export async function getAccessToken() {
   const tokenProd = cookieStore.get('__Secure-next-auth.session-token')?.value;
 
   const myToken = tokenDev || tokenProd;
-
-  // ✅ حماية من الكراش
   if (!myToken) {
-    console.log('❌ No session token found');
+    console.log('No session token found');
     return null;
   }
   try {
@@ -21,7 +19,7 @@ export async function getAccessToken() {
     });
     return decodedToken?.routeToken || null;
   } catch (err) {
-    console.error('❌ Decode failed:', err);
+    console.error('Decode failed:', err);
     return null;
   }
 }
