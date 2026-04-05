@@ -225,7 +225,7 @@ export default function Navbar() {
                 className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
               >
                 <FaRegHeart className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
-                {numOfWishlistItems !== 0 && (
+                {numOfWishlistItems > 0 && (
                   <span className="absolute top-0.5 right-0.5 size-4.5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
                     {numOfWishlistItems}
                   </span>
@@ -236,7 +236,7 @@ export default function Navbar() {
                 className="relative p-2.5 rounded-full hover:bg-gray-100 transition-colors group"
               >
                 <FaCartShopping className=" text-xl text-gray-500 group-hover:text-green-600 transition-colors" />
-                {numOfCartItems !== 0 && (
+                {numOfCartItems > 0 && (
                   <span className="absolute top-0.5 right-0.5 size-4.5 rounded-full bg-green-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
                     {numOfCartItems}
                   </span>
